@@ -1,8 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
-import sys
 import json
-from pprint import pprint
 from time import sleep
 
 def clearscreen():
@@ -10,30 +8,40 @@ def clearscreen():
 
 clearscreen()
 
-radio = json.loads(open('test.json').read())
 
-with open('test.json') as data_file:
-	data = json.load(data_file)
+def importjson():
+	radio = json.loads(open('test.json').read())
+	global data
 
-djname = data['main']['dj']['djname']
+	with open('test.json') as data_file:
+		data = json.load(data_file)
 
-djimage = data['main']['dj']['djimage']
+def extractjson():
+	global djname
+	djname = data['main']['dj']['djname']
 
-djdescription = data['main']['dj']['djtext']
+	global djimage
+	djimage = data['main']['dj']['djimage']
 
-isafkstream = data['main']['isafkstream']
+	global djdescription
+	djdescription = data['main']['dj']['djtext']
 
-threadurl = data['main']['thread']
+	global isafkstream
+	isafkstream = data['main']['isafkstream']
 
-listeners = data['main']['listeners']
+	global threadurl
+	threadurl = data['main']['thread']
 
-songtitle = data['main']['np']
+	global listeners
+	listeners = data['main']['listeners']
 
+	global songtitle
+	songtitle = data['main']['np']
 
-if isafkstream == True:
-	isafkstreamstr = "AFK Stream"
-else:
-	isafkstreamstr = ""
+	global isafkstreamstr
+	if isafkstream == True:
+		isafkstreamstr = "AFK Stream"
+	else:
+		isafkstreamstr = ""
 
-os.system("mpv https://relay0.r-a-d.io/main.mp3")
 clearscreen()

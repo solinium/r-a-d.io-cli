@@ -1,5 +1,16 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3`
 import jsonread
-import mpv
+import interface
 
-python jsonread
+global start
+def start():
+	jsonread.importjson()
+
+	jsonread.extractjson()
+
+	interface.cursesfunctions()
+
+	interface.maincurses()
+
+if __name__ == "__main__":
+	start()
