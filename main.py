@@ -1,15 +1,5 @@
 #!/usr/bin/env python
-import json 
-from time import sleep
+import jsonread
+import mpv
 
-def clearscreen():
-	print ("\n" * 100)
-
-clearscreen()
-
-radio = json.loads(open('test.json').read())
-
-print(radio)
-sleep(10)
-clearscreen()
-print(radio["dj"])
+python jsonread
