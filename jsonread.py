@@ -1,47 +1,58 @@
 #!/usr/bin/env python3
-import os
 import json
+import urllib.request
 from time import sleep
 
-def clearscreen():
-	print ("\n" * 100)
+def clearScreen():
+	print ("\n" * 200)
 
-clearscreen()
+clearScreen()
 
-
-def importjson():
+def importJson():
 	radio = json.loads(open('test.json').read())
 	global data
 
-	with open('test.json') as data_file:
-		data = json.load(data_file)
+	with urllib.request.urlopen("https://r-a-d.io/api") as data_file:
+		data = json.loads(url.read().decode())
 
-def extractjson():
-	global djname
-	djname = data['main']['dj']['djname']
+def extractJson():
+	global djName
+	djName = data['main']['dj']['djname']
 
-	global djimage
-	djimage = data['main']['dj']['djimage']
+	global djImage
+	djImage = data['main']['dj']['djimage']
 
-	global djdescription
-	djdescription = data['main']['dj']['djtext']
+	global djDescription
+	djDescription = data['main']['dj']['djtext']
 
-	global isafkstream
-	isafkstream = data['main']['isafkstream']
+	global isAfkStream
+	isAfkStream = data['main']['isafkstream']
 
-	global threadurl
-	threadurl = data['main']['thread']
+	global threadUrl
+	threadUrl = data['main']['thread']
 
 	global listeners
 	listeners = data['main']['listeners']
 
-	global songtitle
-	songtitle = data['main']['np']
+	global songTitle
+	songTitle = data['main']['np']
 
-	global isafkstreamstr
-	if isafkstream == True:
-		isafkstreamstr = "AFK Stream"
+	global requesting
+	requesting = data['main']['requesting']
+
+	global startTime
+	startTime = data['main']['start_time']
+
+	global endTime
+	endTime = data['main']['end_time']
+
+	global currentTime
+	currentTime = data['main']['current']
+
+	global isAfkStreamStr
+	if isAfkStream == True:
+		isAfkStreamStr = "AFK Stream"
 	else:
-		isafkstreamstr = ""
+		isAfkStreamStr = ""
 
-clearscreen()
+clearScreen()

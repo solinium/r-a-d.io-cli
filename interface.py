@@ -2,14 +2,12 @@
 import curses
 import jsonread
 
-#48 rows, 190 colums on f11 idle
+#48 rows, 190 columns on f11 idle
 
+def clearScreen():
+	print ("\n" * 200)
 
 def cursesfunctions():
-	global clearscreen
-	def clearscreen():
-		print ("\n" * 200)
-
 	global clearcurses
 	def clearcurses():
 		mainwindow.clear()
@@ -22,7 +20,7 @@ def cursesfunctions():
 		curses.endwin()
 
 def maincurses():
-	clearscreen()
+	clearScreen()
 
 	#init curses
 	mainwindow = curses.initscr()

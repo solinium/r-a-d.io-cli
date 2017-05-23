@@ -1,16 +1,27 @@
-#!/usr/bin/env python3`
+#!/usr/bin/env python3
+import mpv
 import jsonread
-import interface
+import songtime
+#import interface
 
 global start
 def start():
-	jsonread.importjson()
+	jsonread.importJson()
 
-	jsonread.extractjson()
+	jsonread.extractJson()
 
-	interface.cursesfunctions()
+	#interface.cursesfunctions()
 
-	interface.maincurses()
+	#interface.maincurses()
+
+	songtime.timerFormat()
+	
+	#mpv.playRadio()
+
+def clearScreen():
+	print ("\n" * 200)
+
+clearScreen()
 
 if __name__ == "__main__":
 	start()
