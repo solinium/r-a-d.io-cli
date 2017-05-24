@@ -6,13 +6,15 @@ from time import sleep
 def clearScreen():
 	print ("\n" * 200)
 
-#temporary workaround (terrible hack) (but it works tho)
+#temporary workaround (terrible hack) (hey, it works)
 def timerFormat():
 	global songLengthSeconds
 	songLengthSeconds = jsonread.endTime - jsonread.startTime
 
-	global currentSongTime
-	currentSongTime = jsonread.current
+	global currentSongcTime
+	currentSongcTime = jsonread.current
+
+
 
 	readableSongLength = str(datetime.timedelta(seconds=songLengthSeconds))
 

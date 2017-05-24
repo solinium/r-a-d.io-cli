@@ -9,11 +9,13 @@ def clearScreen():
 clearScreen()
 
 def importJson():
-	radio = json.loads(open('test.json').read())
+	#data = json.loads(open('test.json').read())
+	
+	#urllib user agent
+	#req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 	global data
-
 	with urllib.request.urlopen("https://r-a-d.io/api") as data_file:
-		data = json.loads(url.read().decode())
+		data = json.loads(url.read().decode(), headers={'User-Agent': 'Mozilla/5.0'})
 
 def extractJson():
 	global djName
