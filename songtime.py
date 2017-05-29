@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3	
 import jsonread
 import datetime
 from time import sleep
@@ -6,24 +6,32 @@ from time import sleep
 def clearScreen():
 	print ("\n" * 200)
 
-#temporary workaround (terrible hack) (hey, it works)
 def timerFormat():
 	global songLengthSeconds
-	songLengthSeconds = jsonread.endTime - jsonread.startTime
+	songLengthSeconds = jsonread.endTime - jsonread.startTime 
 
 	global currentSongcTime
-	currentSongcTime = jsonread.current
-
-
+	currentSongcTime = jsonread.endTime - jsonread.currentTime
 
 	readableSongLength = str(datetime.timedelta(seconds=songLengthSeconds))
 
-	testSongLength = readableSongLength[2:3]
+	readableCurrentSongcTime = str(datetime.timedelta(seconds=currentSongcTime))
+
+	tempSongLength = readableSongLength[2:3]
 	global formattedSongLength
-	if testSongLength == 0:
+	if tempSongLength == 0:
 		formattedSongLength = readableSongLength[2:7]
 	else:
 		formattedSongLength = readableSongLength[3:7]
+
+	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
+	global formattedSongLength
+	if tempCurrentSongcTime == 0:
+		formattedCurrentSongcTime = readableCurrentSongcTime[2:7]
+	else:
+		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
+	formattedCurrentSongcTime = ("%s/%s") % (formattedCurrentSongcTime, formattedSongLength)
+	
 
 	#global currentSongTime
 	#currentSongTime = 0
@@ -31,7 +39,12 @@ def timerFormat():
 	print(jsonread.songTitle)
 	print()
 	print(formattedSongLength)
+	print()
+	print(currentSongcTime)
+	print()
+	print(formattedCurrentSongcTime)
 
+	sleep(5)
 	#while songLengthSeconds > currentSongTime:
 	#sleep(1)
 	#currentSongTime = currentSongTime + 1
@@ -43,5 +56,3 @@ def timerFormat():
 		#formattedCurrentSongTime = (formattedCurrentSongTime[0:2] + "0" + formattedCurrentSongTime[2:3])
 	#print(currentSongTime)
 	print()
-
-	clearScreen()

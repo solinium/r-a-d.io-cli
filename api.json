@@ -1,0 +1,95 @@
+{
+
+    "main": {
+        "np": "Title - Artist",
+        "listeners": 220,
+        "bitrate": 0,
+        "isafkstream": false,
+        "isstreamdesk": false,
+        "current": 1496005535,
+        "start_time": 1496005461,
+        "end_time": 1496005644,
+        "lastset": "2017-05-28 21:05:33",
+        "trackid": 0,
+        "thread": "https://8ch.net/a/res/686749.html",
+        "requesting": false,
+        "djname": "",
+        "dj": {
+            "id": 20,
+            "djname": "Claud",
+            "djtext": "",
+            "djimage": "20",
+            "djcolor": "51 155 185",
+            "visible": true,
+            "priority": 4,
+            "css": "claud_new.css",
+            "theme_id": 2,
+            "role": "dj"
+        },
+        "queue": [
+            {
+                "meta": "Takagaki Ayahi - Hikari no Filament",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T18:56:07+0000\">18:56:07</time>",
+                "type": 0,
+                "timestamp": 1495997767
+            },
+            {
+                "meta": "Yasunori Mitsuda - Dimension Breach",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T18:58:56+0000\">18:58:56</time>",
+                "type": 1,
+                "timestamp": 1495997936
+            },
+            {
+                "meta": "Kana Hanazawa - Meiwaku Spectacle",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T19:02:24+0000\">19:02:24</time>",
+                "type": 0,
+                "timestamp": 1495998144
+            },
+            {
+                "meta": "The Pillows - I Think I Can",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T19:05:24+0000\">19:05:24</time>",
+                "type": 1,
+                "timestamp": 1495998324
+            },
+            {
+                "meta": "RADWIMPS - Zen Zen Zense (Movie Ver.)",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T19:10:08+0000\">19:10:08</time>",
+                "type": 1,
+                "timestamp": 1495998608
+            }
+        ],
+        "lp": [
+            {
+                "meta": "NIKIIE - Duty Friend",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T21:04:21+0000\">21:04:21</time>",
+                "type": 0,
+                "timestamp": 1496005461
+            },
+            {
+                "meta": "Ikuko Kawai - Wuthering Heights",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T21:00:05+0000\">21:00:05</time>",
+                "type": 0,
+                "timestamp": 1496005205
+            },
+            {
+                "meta": "Ikuko kawai - Red Violin",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T20:54:50+0000\">20:54:50</time>",
+                "type": 0,
+                "timestamp": 1496004890
+            },
+            {
+                "meta": "Ikuko Kawai - Cobalt Moon",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T20:49:25+0000\">20:49:25</time>",
+                "type": 0,
+                "timestamp": 1496004565
+            },
+            {
+                "meta": "AUN J-CLASSIC ORCHESTRA - 人生のメリーゴーランド;Jinsei no Marigold (Howl’s Moving Castle)",
+                "time": "<time class=\"timeago\" datetime=\"2017-05-28T20:44:19+0000\">20:44:19</time>",
+                "type": 0,
+                "timestamp": 1496004259
+            }
+        ]
+    }
+
+}

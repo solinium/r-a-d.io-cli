@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import json
-import urllib.request
+#import urllib.request
 from time import sleep
 
 def clearScreen():
@@ -9,13 +9,14 @@ def clearScreen():
 clearScreen()
 
 def importJson():
-	#data = json.loads(open('test.json').read())
-	
+	global data
+	with open('api.json') as data_file:    
+		data = json.load(data_file)
+
 	#urllib user agent
 	#req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-	global data
-	with urllib.request.urlopen("https://r-a-d.io/api") as data_file:
-		data = json.loads(url.read().decode(), headers={'User-Agent': 'Mozilla/5.0'})
+	#with urllib.request.urlopen("https://r-a-d.io/api") as data_file:
+		#data = json.loads(url.read().decode(), headers={'User-Agent': 'Mozilla/5.0'})
 
 def extractJson():
 	global djName
