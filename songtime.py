@@ -25,14 +25,12 @@ def timerFormat():
 		formattedSongLength = readableSongLength[3:7]
 
 	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
-	global formattedSongLength
 	if tempCurrentSongcTime == 0:
 		formattedCurrentSongcTime = readableCurrentSongcTime[2:7]
 	else:
 		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
 	formattedCurrentSongcTime = ("%s/%s") % (formattedCurrentSongcTime, formattedSongLength)
 	
-
 	#global currentSongTime
 	#currentSongTime = 0
 
@@ -40,11 +38,8 @@ def timerFormat():
 	print()
 	print(formattedSongLength)
 	print()
-	print(currentSongcTime)
-	print()
 	print(formattedCurrentSongcTime)
 
-	sleep(5)
 	#while songLengthSeconds > currentSongTime:
 	#sleep(1)
 	#currentSongTime = currentSongTime + 1
