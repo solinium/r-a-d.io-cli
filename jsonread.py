@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import json
 #import urllib.request
-from time import sleep
 
 def clearScreen():
 	print ("\n" * 200)
@@ -12,11 +11,6 @@ def importJson():
 	global data
 	with open('api.json') as data_file:    
 		data = json.load(data_file)
-
-	#urllib user agent
-	#req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-	#with urllib.request.urlopen("https://r-a-d.io/api") as data_file:
-		#data = json.loads(url.read().decode(), headers={'User-Agent': 'Mozilla/5.0'})
 
 def extractJson():
 	global djName
@@ -52,10 +46,22 @@ def extractJson():
 	global currentTime
 	currentTime = data['main']['current']
 
-	global isAfkStreamStr
-	if isAfkStream == True:
-		isAfkStreamStr = "AFK Stream"
-	else:
-		isAfkStreamStr = ""
+
+	def jsonFunctions():
+		global isAfkStreamStr
+		if isAfkStream == True:
+			isAfkStreamStr = "AFK Stream"
+		else:
+			isAfkStreamStr = ""
+
+		global isThreadUp
+		if threadUrl == (""):
+			isThreadUp = (False)
+		else:
+			if djName == ("Hanyuu-sama"):
+				isThreadUp = (False)
+			else:
+				isThreadUp = (True)
+
 
 clearScreen()

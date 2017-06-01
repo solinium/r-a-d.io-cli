@@ -35,8 +35,8 @@ def timerFormat():
 
 	formattedCurrentSongcTime = ("%s/%s") % (formattedCurrentSongcTime, formattedSongLength)
 
-	# global currentSongTime
-	# currentSongTime = 0
+	#global currentSongTime
+	#currentSongTime = 0
 
 	global finalCurrentSongTime
 	finalCurrentSongTime = formattedCurrentSongcTime

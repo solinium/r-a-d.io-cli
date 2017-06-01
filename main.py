@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-import mpv
+import os
+#import mpv
+#import thread
 import jsonread
 import songtime
 #import interface
@@ -15,7 +17,13 @@ def start():
 	#interface.maincurses()
 
 	songtime.timerFormat()
-	
+
+	#thread.init()
+
+	#thread.open()
+
+	os.system("python3 /home/canary/Projects/Programming/Python/r-a-d.io\ client/thread.py")
+
 	#mpv.playRadio()
 
 def clearScreen():
