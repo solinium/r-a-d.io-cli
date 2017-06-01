@@ -16,4 +16,4 @@ def visible(element):
      
 result = filter(visible, data)
      
-print (visible_texts)
+#print (visible_texts)

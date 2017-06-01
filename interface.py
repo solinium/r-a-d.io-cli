@@ -4,6 +4,11 @@ import jsonread
 
 #48 rows, 190 columns on f11 idle
 
+
+
+#deprecated
+#funcs no mapping
+
 def clearScreen():
 	print ("\n" * 200)
 
