@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 #import mpv
 #import thread
 import jsonread
@@ -21,8 +20,6 @@ def start():
 	#thread.init()
 
 	#thread.open()
-
-	os.system("python3 /home/canary/Projects/Programming/Python/r-a-d.io\ client/thread.py")
 
 	#mpv.playRadio()
 

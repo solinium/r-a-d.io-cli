@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import json
-#import urllib.request
 
 def clearScreen():
 	print ("\n" * 200)
