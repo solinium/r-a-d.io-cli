@@ -12,4 +12,4 @@ addons:
     packages:
       - mpv
 script:
-  - py.test --cov-report term-missing --cov app -v
+  - python main.py
