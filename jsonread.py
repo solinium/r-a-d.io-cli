@@ -2,7 +2,7 @@
 import json
 
 def clearScreen():
-	print ("\n" * 200)
+	print ("\033[2J" * 10)
 
 clearScreen()
 
