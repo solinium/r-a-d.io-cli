@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#import mpv
+#import player
 #import thread
 import jsonread
 import songtime
@@ -19,7 +19,7 @@ def start():
 
 	#thread.open()
 
-	#mpv.playRadio()
+	#player.playRadio()
 
 def clearScreen():
 	print ("\033[2J" * 10)
