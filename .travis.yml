@@ -7,9 +7,9 @@ python:
 #cache: pip
 #install:
 #  - pip install
-addons:
-  apt:
-    packages:
-      - mpv
+#addons:
+#  apt:
+#   packages:
+#      - mpv
 script:
   - python main.py
