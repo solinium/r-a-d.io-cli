@@ -4,9 +4,9 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
-cache: pip
-install:
-  - pip install npyscreen
+#cache: pip
+#install:
+#  - pip install
 addons:
   apt:
     packages:
