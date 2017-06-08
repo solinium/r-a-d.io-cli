@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 import json
 
-def clearScreen():
-	print ("\033[2J" * 10)
-
-clearScreen()
-
 def importJson():
 	global data
 	with open('api.json') as data_file:    
@@ -61,6 +56,3 @@ def extractJson():
 				isThreadUp = (False)
 			else:
 				isThreadUp = (True)
-
-
-clearScreen()
