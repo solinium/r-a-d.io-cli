@@ -55,9 +55,9 @@ def functionJson():
 	global isAfkStreamStr
 
 	if isAfkStream == True:
-		isAfkStreamStr = "AFK Stream"
+		isAfkStreamStr = ("AFK Stream")
 	else:
-		isAfkStreamStr = ""
+		isAfkStreamStr = ("")
 
 	global isThreadUp
 
@@ -74,10 +74,10 @@ def functionJson():
 
 def timerFormat():
 	global songLengthSeconds
-	songLengthSeconds = jsonread.endTime - jsonread.startTime
+	songLengthSeconds = endTime - startTime
 
 	global currentSongcTime
-	currentSongcTime = jsonread.endTime - jsonread.currentTime
+	currentSongcTime = endTime - currentTime
 
 	readableSongLength = str(
 		datetime.timedelta(seconds=songLengthSeconds))
@@ -98,7 +98,8 @@ def timerFormat():
 	else:
 		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
 
-	formattedCurrentSongcTime = ("%s/%s") % (formattedCurrentSongcTime, totalSongTime)
+	formattedCurrentSongcTime = ("%s/%s") % (
+		formattedCurrentSongcTime, totalSongTime)
 
 	global currentSongTime
 	currentSongTime = formattedCurrentSongcTime
@@ -110,11 +111,11 @@ def timerFormat():
 
 
 def openThread():
-	if jsonread.threadUp:
+	if threadUp == True:
 		if sys.platform == 'darwin':	#osx
-			subprocess.Popen(['open', jsonread.threadUrl])
+			subprocess.Popen(['open', threadUrl])
 		else:
-			webbrowser.get('firefox').open(jsonread.threadUrl)
+			webbrowser.get('firefox').open(threadUrl)
 	else:
 		print()
 		print("Sorry, thread is not up.")
