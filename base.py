@@ -13,12 +13,6 @@ def importAPI():
 	api = apiraw.json()
 
 
-#def importJson():
-#	global data
-#	with open(api) as data_file:
-#		data = json.load(data_file)
-
-
 def extractJson():
 	global djName
 	djName = api['main']['dj']['djname']
@@ -145,8 +139,6 @@ def openThread():
 
 def start():
 	importAPI()
-
-	#importJson()
 
 	extractJson()
 
