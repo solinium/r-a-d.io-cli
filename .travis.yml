@@ -10,7 +10,6 @@ env:
   - TARGET_ARCH=x64
 
 install:
-  - pip --version
   - pip install requests
 
 script:
