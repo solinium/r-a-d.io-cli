@@ -2,88 +2,79 @@
 import os
 import sys
 import json
+import requests
 import datetime
 import webbrowser
 import subprocess
 
-def importJson():
-	global data
-	with open('api.json') as data_file:    
-		data = json.load(data_file)
+def importAPI():
+	global api
+	apiraw = requests.get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
+	api = apiraw.json()
 
-	# end of importJson
+
+#def importJson():
+#	global data
+#	with open(api) as data_file:
+#		data = json.load(data_file)
 
 
 def extractJson():
 	global djName
-	djName = data['main']['dj']['djname']
+	djName = api['main']['dj']['djname']
 
 	global djImage
-	djImage = data['main']['dj']['djimage']
+	djImage = api['main']['dj']['djimage']
 
 	global djDescription
-	djDescription = data['main']['dj']['djtext']
+	djDescription = api['main']['dj']['djtext']
 
 	global isAfkStream
-	isAfkStream = data['main']['isafkstream']
+	isAfkStream = api['main']['isafkstream']
 
 	global threadUrl
-	threadUrl = data['main']['thread']
+	threadUrl = api['main']['thread']
 
 	global listeners
-	listeners = data['main']['listeners']
+	listeners = api['main']['listeners']
 
 	global songTitle
-	songTitle = data['main']['np']
+	songTitle = api['main']['np']
 
 	global requesting
-	requesting = data['main']['requesting']
+	requesting = api['main']['requesting']
 
 	global startTime
-	startTime = data['main']['start_time']
+	startTime = api['main']['start_time']
 
 	global endTime
-	endTime = data['main']['end_time']
+	endTime = api['main']['end_time']
 
 	global currentTime
-	currentTime = data['main']['current']
-
-	# end of extractJson
+	currentTime = api['main']['current']
 
 
 def functionJson():
 	global isAfkStreamStr
-
 	if isAfkStream == True:
 		isAfkStreamStr = ("AFK Stream")
 	else:
 		isAfkStreamStr = ("")
 
-	global isThreadUp
-
-	if threadUrl == (""):
-		isThreadUp = (False)
-	else:
+	global isOldThread
+	if threadUrl != (""):
 		if djName == ("Hanyuu-sama"):
-			isThreadUp = (False)
+			isOldThread = (True)
 		else:
-			isThreadUp = (True)
+			isOldThread = (False)
 
-	# end of functionJson
-
-
-def timerFormat():
+	
+def songTimeLength():
 	global songLengthSeconds
-	songLengthSeconds = endTime - startTime
-
-	global currentSongcTime
-	currentSongcTime = endTime - currentTime
+	songLengthSeconds = (endTime - startTime)
 
 	readableSongLength = str(
 		datetime.timedelta(seconds=songLengthSeconds))
-
-	readableCurrentSongcTime = str(
-		datetime.timedelta(seconds=currentSongcTime))
 
 	tempSongLength = readableSongLength[2:3]
 	global totalSongTime
@@ -92,7 +83,37 @@ def timerFormat():
 	else:
 		totalSongTime = readableSongLength[3:7]
 
+
+def songTimeLeft():
+	global currentSongcTimeLeft
+	currentSongcTimeLeft = endTime - currentTime
+
+	readableCurrentSongcTimeLeft = str(
+		datetime.timedelta(seconds=currentSongcTimeLeft))
+
+	tempCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[2:3]
+
+	if tempCurrentSongcTimeLeft == 0:
+		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[2:7]
+	else:
+		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[3:7]
+
+	formattedCurrentSongcTimeLeft = ("%s/%s") % (
+		formattedCurrentSongcTimeLeft, totalSongTime)
+
+	global currentSongTimeLeft
+	currentSongTimeLeft = formattedCurrentSongcTimeLeft
+
+
+def songTimeCurrent():
+	global currentSongcTime
+	currentSongcTime = (songLengthSeconds - currentSongcTimeLeft)
+
+	readableCurrentSongcTime = str(
+		datetime.timedelta(seconds=currentSongcTime))
+
 	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
+
 	if tempCurrentSongcTime == 0:
 		formattedCurrentSongcTime = readableCurrentSongcTime[2:7]
 	else:
@@ -103,15 +124,15 @@ def timerFormat():
 
 	global currentSongTime
 	currentSongTime = formattedCurrentSongcTime
-
-	# currentSongTime is the real current time
-	# totalSongTime is final song length
-
-	# end of timeFormat
+	
+	# totalSongTime is song length
+	# currentSongTime is how far in the song
+	# currentSongTimeLeft is how much time is left
 
 
 def openThread():
-	if threadUp == True:
+	global thread
+	if isOldThread == (False):
 		if sys.platform == 'darwin':	#osx
 			subprocess.Popen(['open', threadUrl])
 		else:
@@ -121,17 +142,21 @@ def openThread():
 		print("Sorry, thread is not up.")
 		print()
 
-		# end of openThread
-
 
 def start():
-	importJson()
+	importAPI()
+
+	#importJson()
 
 	extractJson()
 
 	functionJson()
 
-	timerFormat()
+	songTimeLength()
+
+	songTimeLeft()
+
+	songTimeCurrent()
 
 if __name__ == "__main__":
 	start()
