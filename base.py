@@ -4,7 +4,7 @@ import sys
 import json
 import requests
 import datetime
-import pprint
+#import pprint
 import webbrowser
 import subprocess
 
@@ -47,12 +47,12 @@ def extractJson():
 	global currentTime
 	currentTime = api['main']['current']
 
-def extractQueue():
+#def extractQueue():
 
 
 	#test arrays
 
-	pprint.pprint(api)
+	#pprint.pprint(api)
 
 	#global queueTitle1
 	#queueTitle1 = api['main']['queue']['0']['meta']
@@ -84,22 +84,22 @@ def extractQueue():
 	#global queueTime5
 	#queueTime1 = api['main']['queue']['4']['timestamp']
 
-def calculateQueueTime(x, y):
-	if y == (1):
-		global queueStartSecs1
-		queueStartSecs1 = (x - currentTime)
-	elif y == (2):
-		global queueStartSecs2
-		queueStartSecs2 = (x - currentTime)
-	elif y == (3):
-		global queueStartSecs3
-		queueStartSecs3 = (x - currentTime)
-	elif y == (4):
-		global queueStartSecs4
-		queueStartSecs = (x - currentTime)
-	elif y == (5):
-		global queueStartSecs5
-		queueStartSecs5= (x - currentTime)
+#def calculateQueueTime(x, y):
+#	if y == (1):
+#		global queueStartSecs1
+#		queueStartSecs1 = (x - currentTime)
+#	elif y == (2):
+#		global queueStartSecs2
+#		queueStartSecs2 = (x - currentTime)
+#	elif y == (3):
+#		global queueStartSecs3
+#		queueStartSecs3 = (x - currentTime)
+#	elif y == (4):
+#		global queueStartSecs4
+#		queueStartSecs = (x - currentTime)
+#	elif y == (5):
+#		global queueStartSecs5
+#		queueStartSecs5= (x - currentTime)
 
 def functionJson():
 	global isAfkStreamStr
@@ -115,11 +115,11 @@ def functionJson():
 		else:
 			isOldThread = (False)
 
-	calculateQueueTime(queueTime1, 1)
-	calculateQueueTime(queueTime2, 2)
-	calculateQueueTime(queueTime3, 3)
-	calculateQueueTime(queueTime4, 4)
-	calculateQueueTime(queueTime5, 5)
+	#calculateQueueTime(queueTime1, 1)
+	#calculateQueueTime(queueTime2, 2)
+	#calculateQueueTime(queueTime3, 3)
+	#calculateQueueTime(queueTime4, 4)
+	#calculateQueueTime(queueTime5, 5)
 
 def songTimeLength():
 	global songLengthSeconds
@@ -197,7 +197,7 @@ def start():
 
 	extractJson()
 
-	extractQueue()
+	#extractQueue()
 
 	functionJson()
 
