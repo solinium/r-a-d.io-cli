@@ -4,7 +4,6 @@ import sys
 import json
 import requests
 import datetime
-#import pprint
 import webbrowser
 import subprocess
 
@@ -48,12 +47,8 @@ def extractJson():
 	currentTime = api['main']['current']
 
 #def extractQueue():
-
-
 	#test arrays
-
-	#pprint.pprint(api)
-
+	
 	#global queueTitle1
 	#queueTitle1 = api['main']['queue']['0']['meta']
 
