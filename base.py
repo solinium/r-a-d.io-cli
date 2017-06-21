@@ -178,6 +178,7 @@ def songTimeCurrent():
 	# totalSongTime is song length
 	# currentSongTime is how far in the song
 	# currentSongTimeLeft is how much time is left
+	print(songTitle)
 	print(totalSongTime)
 	print(currentSongTime)
 	print(currentSongTimeLeft)
