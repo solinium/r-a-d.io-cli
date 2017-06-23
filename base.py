@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 import os
 import sys
-import json
-import requests
 import datetime
 import webbrowser
 import subprocess
+from requests import get
 
 def getJson():
 	global api
-	apiraw = requests.get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
+	apiraw = get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
 	api = apiraw.json()
 
 def readJson():

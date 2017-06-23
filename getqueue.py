@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-import json
-import requests
+from requests import get
 
 def importAPI():
 	global api
-	apiraw = requests.get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
+	apiraw = get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
 	api = apiraw.json()
 
 def extractQueue():
