@@ -13,4 +13,4 @@ install:
   - pip install requests
 
 script:
-  - python base.py
+  - python queue.py
