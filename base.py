@@ -48,7 +48,7 @@ def readJson():
 def readQueue():
 	dir_path = os.path.dirname(os.path.realpath(__file__))
 	os.environ['dirpath'] = dir_path
-	os.system('cd $dirpath && python3 queue.py')
+	os.system('cd $dirpath && python3 getqueue.py')
 
 def functionJson():
 	global isAfkStreamStr
