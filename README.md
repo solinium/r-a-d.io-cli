@@ -7,7 +7,7 @@ written in python 3.5 using r/a/dio's json 'api'
 only tested on linux, osx should work
 
 to install:
-`wget -O - test/install.sh | bash`
+`wget -O - https://raw.githubusercontent.com/solinium/r-a-d.io-base/master/install.sh | bash`
 
 **currently work-in-progress, not functioning**
 
