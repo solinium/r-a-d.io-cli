@@ -14,4 +14,4 @@ install:
 
 script:
   - python base.py
-  - python queue.py
+  - python getqueue.py
