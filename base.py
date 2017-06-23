@@ -2,7 +2,6 @@
 import os
 import sys
 import json
-import queue
 import requests
 import datetime
 import webbrowser
