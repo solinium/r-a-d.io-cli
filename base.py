@@ -3,8 +3,8 @@ import os
 import sys
 import datetime
 import webbrowser
-import subprocess
 from requests import get
+from subprocess import Popen
 
 def getJson():
 	global api
@@ -131,7 +131,7 @@ def openThread():
 	global thread
 	if isOldThread == (False):
 		if sys.platform == ('darwin'):	#osx
-			subprocess.Popen(['open', threadUrl])
+			Popen(['open', threadUrl])
 		else:
 			webbrowser.get('firefox').open(threadUrl)
 	else:
