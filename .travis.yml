@@ -9,6 +9,13 @@ os:
 env:
   - TARGET_ARCH=x64
 
+notifications:
+  email:
+    recipients:
+      - asg@airmail.cc
+    on_success: never
+    on_failure: never
+
 install:
   - pip install requests
 
