@@ -1,64 +1,56 @@
 #!/usr/bin/env python3
-from requests import get
+import gettime as getTime
 
-def importAPI():
-	global api
-	apiraw = get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
-	api = apiraw.json()
+getTime.start()
 
 def extractQueue():
-	global currentTime
-	currentTime = api['main']['current']
-	
 	global queueTitle1
-	queueTitle1 = api['main']['queue']['0']['meta']
+	queueTitle1 = getTime.api['main']['queue']['0']['meta']
 
 	global queueTime1
-	queueTime1 = api['main']['queue']['0']['timestamp']
+	queueTime1 = getTime.api['main']['queue']['0']['timestamp']
 
 	global queueTitle2
-	queueTitle2 = api['main']['queue']['1']['meta']
+	queueTitle2 = getTime.api['main']['queue']['1']['meta']
 
 	global queueTime2
-	queueTime2= api['main']['queue']['1']['timestamp']
+	queueTime2= getTime.api['main']['queue']['1']['timestamp']
 
 	global queueTitle3
-	queueTitle3 = api['main']['queue']['2']['meta']
+	queueTitle3 = getTime.api['main']['queue']['2']['meta']
 
 	global queueTime3
-	queueTime1 = api['main']['queue']['2']['timestamp']
+	queueTime1 = getTime.api['main']['queue']['2']['timestamp']
 
 	global queueTitle4
-	queueTitle4 = api['main']['queue']['3']['meta']
+	queueTitle4 = getTime.api['main']['queue']['3']['meta']
 
 	global queueTime4
-	queueTime1 = api['main']['queue']['3']['timestamp']
+	queueTime1 = getTime.api['main']['queue']['3']['timestamp']
 
 	global queueTitle5
-	queueTitle4 = api['main']['queue']['4']['meta']
+	queueTitle4 = getTime.api['main']['queue']['4']['meta']
 
 	global queueTime5
-	queueTime1 = api['main']['queue']['4']['timestamp']
+	queueTime1 = getTime.api['main']['queue']['4']['timestamp']
 
 def calculateQueueTime(x, y):
 	if y == (1):
 		global queueStartSecs1
-		queueStartSecs1 = (x - currentTime)
+		queueStartSecs1 = (x - getTime.currentTime)
 	elif y == (2):
 		global queueStartSecs2
-		queueStartSecs2 = (x - currentTime)
+		queueStartSecs2 = (x - getTime.currentTime)
 	elif y == (3):
 		global queueStartSecs3
-		queueStartSecs3 = (x - currentTime)
+		queueStartSecs3 = (x - getTime.currentTime)
 	elif y == (4):
 		global queueStartSecs4
-		queueStartSecs4 = (x - currentTime)
+		queueStartSecs4 = (x - getTime.currentTime)
 	elif y == (5):
 		global queueStartSecs5
-		queueStartSecs5 = (x - currentTime)
+		queueStartSecs5 = (x - getTime.currentTime)
 
-
-importAPI()
 extractQueue()
 
 calculateQueueTime(queueTime1, 1)

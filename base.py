@@ -7,8 +7,8 @@ from subprocess import Popen
 from datetime import timedelta
 
 def getJson():
-	global api
 	apiraw = get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
+	global api
 	api = apiraw.json()
 
 def readJson():
