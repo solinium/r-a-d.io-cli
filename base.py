@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import os
-import sys
-import datetime
 import webbrowser
 from requests import get
+from sys import platform
 from subprocess import Popen
+from datetime import timedelta
 
 def getJson():
 	global api
@@ -69,7 +69,7 @@ def songTimeLength():
 	songLengthSeconds = (endTime - startTime)
 
 	readableSongLength = str(
-		datetime.timedelta(seconds=songLengthSeconds))
+		timedelta(seconds=songLengthSeconds))
 
 	tempSongLength = readableSongLength[2:3]
 	global totalSongTime
@@ -83,7 +83,7 @@ def songTimeLeft():
 	currentSongcTimeLeft = endTime - currentTime
 
 	readableCurrentSongcTimeLeft = str(
-		datetime.timedelta(seconds=currentSongcTimeLeft))
+		timedelta(seconds=currentSongcTimeLeft))
 
 	tempCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[2:3]
 
@@ -103,7 +103,7 @@ def songTimeCurrent():
 	currentSongcTime = (songLengthSeconds - currentSongcTimeLeft)
 
 	readableCurrentSongcTime = str(
-		datetime.timedelta(seconds=currentSongcTime))
+		timedelta(seconds=currentSongcTime))
 
 	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
 
@@ -130,7 +130,7 @@ def songTimeCurrent():
 def openThread():
 	global thread
 	if isOldThread == (False):
-		if sys.platform == ('darwin'):	#osx
+		if platform == ('darwin'):	#osx
 			Popen(['open', threadUrl])
 		else:
 			webbrowser.get('firefox').open(threadUrl)
