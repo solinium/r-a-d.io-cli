@@ -90,8 +90,7 @@ def songTimeLeft():
 	else:
 		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[3:7]
 
-	formattedCurrentSongcTimeLeft = ("%s/%s") % (\
-		
+	formattedCurrentSongcTimeLeft = ("%s/%s") % (
 		formattedCurrentSongcTimeLeft, totalSongTime)
 
 	global currentSongTimeLeft
