@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-import os
-from sys import platform
+#import os
+#from sys import platform
 from requests import get
-from subprocess import Popen
+#from subprocess import Popen
 from datetime import timedelta
-from webbrowser import get as wbget
+#from webbrowser import get as wbget
+
+# commented imports are for testing
 
 def getJson():
 	apiraw = get(url='https://r-a-d.io/api', 
@@ -46,7 +48,7 @@ def readJson():
 	global currentTime
 	currentTime = api['main']['current']
 
-def functionJson():
+def jsonFunctions():
 	global isAfkStreamStr
 	if isAfkStream == (True):
 		isAfkStreamStr = ("AFK Stream")
@@ -59,6 +61,12 @@ def functionJson():
 			isOldThread = (True)
 		else:
 			isOldThread = (False)
+
+	global isThreadUp
+	if isOldThread == (False):
+		isThreadUp = (True)
+	else:
+		isThreadUp = (False)
 
 def songTimeLength():
 	global songLengthSeconds
@@ -120,6 +128,8 @@ def songTimeCurrent():
 	# currentSongTime is how far in the song
 	# currentSongTimeLeft is how much time is left
 
+# testing in terminal
+'''
 	if platform == ('darwin'):
 		os.system('clear')
 	elif platform == ('posix'):
@@ -129,44 +139,25 @@ def songTimeCurrent():
 	else:
 		os.system('cls')
 
-	os.system('clear')
 	print("Title:")
 	print(songTitle)
 	print()
-	print("Song Length:")
+	print("Length:")
 	print(totalSongTime)
 	print()
-	print("Current Song Time:")
+	print("Current Time:")
 	print(currentSongTime)
 	print()
-	print("Song Time Left:")
+	print("Time Left:")
 	print(currentSongTimeLeft)
-
-def openThread():
-	global thread
-	if isOldThread == (False):
-		if platform == ('darwin'):	#osx
-			Popen(['open', threadUrl])
-
-		if platform == ('linux'):	#linux
-			Popen(['open', threadUrl])
-
-		if platform == ('posix'):	#unix
-			Popen(['open', threadUrl])
-
-		else:	#win
-			wbget('firefox').open(threadUrl)
-	else:
-		print()
-		print("Sorry, thread is not up.")
-		print()
+'''
 
 def start():
 	getJson()
 
 	readJson()
 
-	functionJson()
+	jsonFunctions()
 
 	songTimeLength()
 
