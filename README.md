@@ -6,9 +6,9 @@ written in python 3.5 using r/a/dio's json 'api'
 
 only tested on linux, osx should work
 
-requires requests, to install: `sudo -H pip3 install requests`
+requires requests:
+`sudo pip3 install requests`
 
 if you don't have pip3, install the python3-pip package with your respective package manager
 
 **currently work-in-progress, not functioning**
-
