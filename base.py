@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 import os
-import webbrowser
-from requests import get
 from sys import platform
+from requests import get
 from subprocess import Popen
 from datetime import timedelta
+from webbrowser import get as wbget
 
 def getJson():
-	apiraw = get(url='https://r-a-d.io/api', headers={'User-agent': 'Mozilla/5.0'})
+	apiraw = get(url='https://r-a-d.io/api', 
+		headers={'User-agent': 'Mozilla/5.0'})
 	global api
 	api = apiraw.json()
 
@@ -45,11 +46,6 @@ def readJson():
 	global currentTime
 	currentTime = api['main']['current']
 
-def readQueue():
-	dir_path = os.path.dirname(os.path.realpath(__file__))
-	os.environ['dirpath'] = dir_path
-	os.system('cd $dirpath && python3 getqueue.py')
-
 def functionJson():
 	global isAfkStreamStr
 	if isAfkStream == (True):
@@ -72,7 +68,9 @@ def songTimeLength():
 		timedelta(seconds=songLengthSeconds))
 
 	tempSongLength = readableSongLength[2:3]
+
 	global totalSongTime
+
 	if tempSongLength == (0):
 		totalSongTime = readableSongLength[2:7]
 	else:
@@ -92,7 +90,8 @@ def songTimeLeft():
 	else:
 		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[3:7]
 
-	formattedCurrentSongcTimeLeft = ("%s/%s") % (
+	formattedCurrentSongcTimeLeft = ("%s/%s") % (\
+		
 		formattedCurrentSongcTimeLeft, totalSongTime)
 
 	global currentSongTimeLeft
@@ -117,14 +116,31 @@ def songTimeCurrent():
 
 	global currentSongTime
 	currentSongTime = formattedCurrentSongcTime
-	
+
 	# totalSongTime is song length
 	# currentSongTime is how far in the song
 	# currentSongTimeLeft is how much time is left
 
+	if platform == ('darwin'):
+		os.system('clear')
+	elif platform == ('posix'):
+		os.system('clear')
+	elif platform == ('linux'):
+		os.system('clear')
+	else:
+		os.system('cls')
+
+	os.system('clear')
+	print("Title:")
 	print(songTitle)
+	print()
+	print("Song Length:")
 	print(totalSongTime)
+	print()
+	print("Current Song Time:")
 	print(currentSongTime)
+	print()
+	print("Song Time Left:")
 	print(currentSongTimeLeft)
 
 def openThread():
@@ -132,8 +148,15 @@ def openThread():
 	if isOldThread == (False):
 		if platform == ('darwin'):	#osx
 			Popen(['open', threadUrl])
-		else:
-			webbrowser.get('firefox').open(threadUrl)
+
+		if platform == ('linux'):	#linux
+			Popen(['open', threadUrl])
+
+		if platform == ('posix'):	#unix
+			Popen(['open', threadUrl])
+
+		else:	#win
+			wbget('firefox').open(threadUrl)
 	else:
 		print()
 		print("Sorry, thread is not up.")
