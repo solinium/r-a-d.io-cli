@@ -11,4 +11,6 @@ requires requests:
 
 if you don't have pip3, install the python3-pip package with your respective package manager
 
-**currently work-in-progress, not functioning**
+currently only tested on linux
+
+**currently working, very basic functionality**
