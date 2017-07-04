@@ -2,16 +2,15 @@
 
 [![Build Status](https://travis-ci.org/solinium/r-a-d.io-base.svg?branch=master)](https://travis-ci.org/solinium/r-a-d.io-base)
 
-written in python 3.5 using r/a/dio's json 'api'
-
-only tested on linux, osx should work
+Written in python 3.5 using r/a/dio's JSON API
 
 requires requests:
 `sudo pip3 install requests`
 
-if you don't have pip3, install the python3-pip package with your respective package manager
+If you don't have pip3, install the python3-pip package with your respective package manager
 
-currently only tested on linux
+At the moment, this is only tested in Linux
 
-**currently working, very basic functionality**
-**non-stable commits are made in the development branch**
+**Currently stable, very basic functionality is working**
+
+**Non-stable commits are made in the development branch**
