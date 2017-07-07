@@ -3,13 +3,12 @@
 
 def getAPI():
 	from requests import get
+
 	apiurl = ("https://r-a-d.io/api")
 	apiraw = get(url=apiurl, headers={'User-agent': 'Mozilla/5.0'})
 	global api
 	api = apiraw.json()
 
-
-def readAPI():
 	global djName
 	djName = api['main']['dj']['djname']
 
@@ -43,8 +42,6 @@ def readAPI():
 	global currentTime
 	currentTime = api['main']['current']
 
-
-def functionsAPI():
 	global isAfkStreamStr
 	if isAfkStream == (True):
 		isAfkStreamStr = ("AFK Stream")
@@ -67,6 +64,7 @@ def functionsAPI():
 
 def getSongLength():
 	from datetime import timedelta
+
 	global songLengthSeconds
 	songLengthSeconds = (endTime - startTime)
 
@@ -84,6 +82,7 @@ def getSongLength():
 
 def getSongTimeLeft():
 	from datetime import timedelta
+
 	global songcTimeLeft
 	songcTimeLeft = endTime - currentTime
 
@@ -106,6 +105,7 @@ def getSongTimeLeft():
 
 def getSongTimeCurrent():
 	from datetime import timedelta
+
 	global currentSongcTime
 	currentSongcTime = (songLengthSeconds - songcTimeLeft)
 
@@ -158,10 +158,6 @@ def testing():
 
 def start():
 	getAPI()
-
-	readAPI()
-
-	functionsAPI()
 
 	getSongLength()
 
