@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
-#import os
-#from sys import platform
-from requests import get
-#from subprocess import Popen
-from datetime import timedelta
-#from webbrowser import get as wbget
 
-# commented imports are for testing
 
-def getJson():
-	apiraw = get(url='https://r-a-d.io/api', 
-		headers={'User-agent': 'Mozilla/5.0'})
+def getAPI():
+	from requests import get
+	apiurl = ("https://r-a-d.io/api")
+	apiraw = get(url=apiurl, headers={'User-agent': 'Mozilla/5.0'})
 	global api
 	api = apiraw.json()
 
-def readJson():
+
+def readAPI():
 	global djName
 	djName = api['main']['dj']['djname']
 
@@ -48,7 +43,8 @@ def readJson():
 	global currentTime
 	currentTime = api['main']['current']
 
-def jsonFunctions():
+
+def functionsAPI():
 	global isAfkStreamStr
 	if isAfkStream == (True):
 		isAfkStreamStr = ("AFK Stream")
@@ -68,7 +64,9 @@ def jsonFunctions():
 	else:
 		isThreadUp = (False)
 
-def songTimeLength():
+
+def getSongLength():
+	from datetime import timedelta
 	global songLengthSeconds
 	songLengthSeconds = (endTime - startTime)
 
@@ -77,36 +75,39 @@ def songTimeLength():
 
 	tempSongLength = readableSongLength[2:3]
 
-	global totalSongTime
-
+	global songLength
 	if tempSongLength == (0):
-		totalSongTime = readableSongLength[2:7]
+		songLength = readableSongLength[2:7]
 	else:
-		totalSongTime = readableSongLength[3:7]
+		songLength = readableSongLength[3:7]
 
-def songTimeLeft():
-	global currentSongcTimeLeft
-	currentSongcTimeLeft = endTime - currentTime
 
-	readableCurrentSongcTimeLeft = str(
-		timedelta(seconds=currentSongcTimeLeft))
+def getSongTimeLeft():
+	from datetime import timedelta
+	global songcTimeLeft
+	songcTimeLeft = endTime - currentTime
 
-	tempCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[2:3]
+	readableSongcTimeLeft = str(
+		timedelta(seconds=songcTimeLeft))
 
-	if tempCurrentSongcTimeLeft == (0):
-		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[2:7]
+	tempSongcTimeLeft = readableSongcTimeLeft[2:3]
+
+	if tempSongcTimeLeft == (0):
+		formattedSongcTimeLeft = readableSongcTimeLeft[2:7]
 	else:
-		formattedCurrentSongcTimeLeft = readableCurrentSongcTimeLeft[3:7]
+		formattedSongcTimeLeft = readableSongcTimeLeft[3:7]
 
-	formattedCurrentSongcTimeLeft = ("%s/%s") % (
-		formattedCurrentSongcTimeLeft, totalSongTime)
+	formattedSongcTimeLeft = ("%s/%s") % (
+		formattedSongcTimeLeft, songLength)
 
-	global currentSongTimeLeft
-	currentSongTimeLeft = formattedCurrentSongcTimeLeft
+	global songTimeLeft
+	songTimeLeft = formattedSongcTimeLeft
 
-def songTimeCurrent():
+
+def getSongTimeCurrent():
+	from datetime import timedelta
 	global currentSongcTime
-	currentSongcTime = (songLengthSeconds - currentSongcTimeLeft)
+	currentSongcTime = (songLengthSeconds - songcTimeLeft)
 
 	readableCurrentSongcTime = str(
 		timedelta(seconds=currentSongcTime))
@@ -119,51 +120,57 @@ def songTimeCurrent():
 		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
 
 	formattedCurrentSongcTime = ("%s/%s") % (
-		formattedCurrentSongcTime, totalSongTime)
+		formattedCurrentSongcTime, songLength)
 
 	global currentSongTime
 	currentSongTime = formattedCurrentSongcTime
 
-	# totalSongTime is song length
+	# songLength is song length
 	# currentSongTime is how far in the song
-	# currentSongTimeLeft is how much time is left
+	# songTimeLeft is how much time is left
 
-# testing in terminal
-'''
+
+def testing():
+	from os import system
+	from sys import platform
+
 	if platform == ('darwin'):
-		os.system('clear')
+		system('clear')
 	elif platform == ('posix'):
-		os.system('clear')
+		system('clear')
 	elif platform == ('linux'):
-		os.system('clear')
+		system('clear')
 	else:
-		os.system('cls')
+		system('cls')
 
 	print("Title:")
 	print(songTitle)
 	print()
 	print("Length:")
-	print(totalSongTime)
+	print(songLength)
 	print()
 	print("Current Time:")
 	print(currentSongTime)
 	print()
 	print("Time Left:")
-	print(currentSongTimeLeft)
-'''
+	print(songTimeLeft)
+
 
 def start():
-	getJson()
+	getAPI()
 
-	readJson()
+	readAPI()
 
-	jsonFunctions()
+	functionsAPI()
 
-	songTimeLength()
+	getSongLength()
 
-	songTimeLeft()
+	getSongTimeLeft()
 
-	songTimeCurrent()
+	getSongTimeCurrent()
+
+	# testing()
+
 
 if __name__ == ("__main__"):
 	start()
