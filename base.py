@@ -42,6 +42,8 @@ def getAPI():
 	global currentTime
 	currentTime = api['main']['current']
 
+
+def functionAPI():
 	global isAfkStreamStr
 	if isAfkStream == (True):
 		isAfkStreamStr = ("AFK Stream")
@@ -114,50 +116,87 @@ def getSongTimeCurrent():
 
 	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
 
-	if tempCurrentSongcTime == (0):
-		formattedCurrentSongcTime = readableCurrentSongcTime[2:7]
-	else:
-		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
-
-	formattedCurrentSongcTime = ("%s/%s") % (
-		formattedCurrentSongcTime, songLength)
-
 	global currentSongTime
-	currentSongTime = formattedCurrentSongcTime
+	if tempCurrentSongcTime == (0):
+		currentSongTime = readableCurrentSongcTime[2:7]
+	else:
+		currentSongTime = readableCurrentSongcTime[3:7]
 
-	# songLength is song length
-	# currentSongTime is how far in the song
-	# songTimeLeft is how much time is left
+	currentSongTime = ("%s/%s") % (
+		currentSongTime, songLength)
 
 
-def testing():
+def hybridTimer():
 	from os import system
 	from sys import platform
+	from time import sleep
+	from time import timedelta
 
-	if platform == ('darwin'):
-		system('clear')
-	elif platform == ('posix'):
-		system('clear')
-	elif platform == ('linux'):
-		system('clear')
-	else:
-		system('cls')
+	global timerCurrent
+	global timerCurrentSeconds
 
-	print("Title:")
-	print(songTitle)
-	print()
-	print("Length:")
-	print(songLength)
-	print()
-	print("Current Time:")
-	print(currentSongTime)
-	print()
-	print("Time Left:")
-	print(songTimeLeft)
+	timerCurrentSeconds = (0)
+	timerMax = songLengthSeconds
+	tempTitle = songTitle
+
+	while (timerCurrentSeconds < timerMax):
+		timerCurrentSeconds = (timerCurrentSeconds + 1)
+
+		if (timerCurrentSeconds % 5) == (0) or timerCurrentSeconds == (
+			timerMax):
+			getAPI()
+			getSongLength()
+			getSongTimeLeft()
+			getSongTimeCurrent()
+			if tempTitle != songTitle:
+				timerCurrentSeconds = (0)
+			timerMax = songLengthSeconds
+			tempTitle = songTitle
+
+		timerCurrentReadable = str(
+			timedelta(seconds=timerCurrentSeconds))
+
+		timerCurrentTemp = timerCurrentReadable[2:3]
+
+		if timerCurrentTemp == (0):
+			timerCurrent = timerCurrentReadable[2:7]
+		else:
+			timerCurrent = timerCurrentReadable[3:7]
+
+		timerCurrent = ("%s/%s") % (
+			timerCurrent, songLength)
+
+		if platform == ('linux') or ('darwin') or ('posix'):
+			system('clear')
+		else:
+			system('cls')
+
+		print("Title:")
+		print(songTitle)
+		print()
+		print("Length:")
+		print(songLength)
+		print()
+		print("Current Time:")
+		print(currentSongTime)
+		print()
+		print("Time Left:")
+		print(songTimeLeft)
+		print()
+		print("Hybrid Time Left:")
+		print(timerCurrent)
+		sleep(1)
+
+# songLength is song length
+# currentSongTime is how far in the song
+# songTimeLeft is how much time is left
+# timerCurrent is current song time (hybrid)
 
 
 def start():
 	getAPI()
+
+	functionAPI()
 
 	getSongLength()
 
@@ -165,7 +204,7 @@ def start():
 
 	getSongTimeCurrent()
 
-	# testing()
+	hybridTimer()
 
 
 if __name__ == ("__main__"):
