@@ -16,6 +16,13 @@ def getPlatform():
 	isTravis = environ.get('TRAVIS')
 
 
+def keyboard():
+	if isTravis != (True):
+		from keyboard import wait
+		print("Press space to start!")
+		wait('space')
+
+
 def getAPI():
 	from requests import get
 
@@ -77,6 +84,9 @@ def functionAPI():
 		isThreadUp = (True)
 	else:
 		isThreadUp = (False)
+
+	global tempTitle
+	tempTitle = songTitle
 
 
 def getSongLength():
@@ -144,7 +154,6 @@ def getSongTimeCurrent():
 def hybridTimer():
 	from os import system
 	from time import sleep
-	from keyboard import wait
 	from datetime import timedelta
 
 	global timerCurrent
@@ -152,31 +161,25 @@ def hybridTimer():
 
 	timerCurrentSeconds = (currentSongcTime)
 	timerMax = songLengthSeconds
-	tempTitle = songTitle
 
 	if unix == (True):
 		system('clear')
-	elif unix == (False):
+	else:
 		system('cls')
-
-	if isTravis != (True):
-		print("Press space to start!")
-		wait('space')
 
 	while (timerCurrentSeconds < timerMax):
 		timerCurrentSeconds = (timerCurrentSeconds + 1)
 
 		if (timerCurrentSeconds % 5) == (0) or timerCurrentSeconds == (
-			timerMax):
-			getAPI()
-			getSongLength()
-			getSongTimeLeft()
-			getSongTimeCurrent()
-			timerCurrentSeconds = (currentSongcTime)
-			if tempTitle != songTitle:
-				timerCurrentSeconds = (currentSongcTime)
-			timerMax = songLengthSeconds
-			tempTitle = songTitle
+			timerMax) or tempTitle != (
+				songTitle):
+					getAPI()
+					functionAPI()
+					getSongLength()
+					getSongTimeLeft()
+					getSongTimeCurrent()
+					timerCurrentSeconds = (currentSongcTime)
+					timerMax = songLengthSeconds
 
 		timerCurrentReadable = str(
 			timedelta(seconds=timerCurrentSeconds))
@@ -219,10 +222,11 @@ def hybridTimer():
 
 
 def start():
+	getPlatform()
+	keyboard()
+
 	trueBool = (True)
 	while trueBool == (True):
-		getPlatform()
-
 		getAPI()
 
 		functionAPI()
