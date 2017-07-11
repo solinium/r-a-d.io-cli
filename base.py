@@ -2,15 +2,18 @@
 
 
 def getPlatform():
+	from os import environ
 	from sys import platform
 
 	global unix
-
+	global isTravis
 	if platform == ('linux') or ('darwin') or ('freebsd') or (
 		'cygwin') or ('posix'):
 			unix = (True)
 	else:
 		unix = (False)
+
+	isTravis = environ.get('TRAVIS')
 
 
 def getAPI():
@@ -141,6 +144,7 @@ def getSongTimeCurrent():
 def hybridTimer():
 	from os import system
 	from time import sleep
+	from keyboard import wait
 	from datetime import timedelta
 
 	global timerCurrent
@@ -149,6 +153,15 @@ def hybridTimer():
 	timerCurrentSeconds = (currentSongcTime)
 	timerMax = songLengthSeconds
 	tempTitle = songTitle
+
+	if unix == (True):
+		system('clear')
+	elif unix == (False):
+		system('cls')
+
+	if isTravis != (True):
+		print("Press space to start!")
+		wait('space')
 
 	while (timerCurrentSeconds < timerMax):
 		timerCurrentSeconds = (timerCurrentSeconds + 1)
