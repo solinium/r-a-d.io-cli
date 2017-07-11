@@ -1,6 +1,18 @@
 #!/usr/bin/env python3
 
 
+def getPlatform():
+	from sys import platform
+
+	global unix
+
+	if platform == ('linux') or ('darwin') or ('freebsd') or (
+		'cygwin') or ('posix'):
+			unix = (True)
+	else:
+		unix = (False)
+
+
 def getAPI():
 	from requests import get
 
@@ -128,14 +140,13 @@ def getSongTimeCurrent():
 
 def hybridTimer():
 	from os import system
-	from sys import platform
 	from time import sleep
-	from time import timedelta
+	from datetime import timedelta
 
 	global timerCurrent
 	global timerCurrentSeconds
 
-	timerCurrentSeconds = (0)
+	timerCurrentSeconds = (currentSongcTime)
 	timerMax = songLengthSeconds
 	tempTitle = songTitle
 
@@ -148,8 +159,9 @@ def hybridTimer():
 			getSongLength()
 			getSongTimeLeft()
 			getSongTimeCurrent()
+			timerCurrentSeconds = (currentSongcTime)
 			if tempTitle != songTitle:
-				timerCurrentSeconds = (0)
+				timerCurrentSeconds = (currentSongcTime)
 			timerMax = songLengthSeconds
 			tempTitle = songTitle
 
@@ -166,9 +178,9 @@ def hybridTimer():
 		timerCurrent = ("%s/%s") % (
 			timerCurrent, songLength)
 
-		if platform == ('linux') or ('darwin') or ('posix'):
+		if unix == (True):
 			system('clear')
-		else:
+		elif unix == (False):
 			system('cls')
 
 		print("Title:")
@@ -177,13 +189,13 @@ def hybridTimer():
 		print("Length:")
 		print(songLength)
 		print()
-		print("Current Time:")
-		print(currentSongTime)
-		print()
-		print("Time Left:")
+		print("Time Left (updated every 5s):")
 		print(songTimeLeft)
 		print()
-		print("Hybrid Time Left:")
+		print("Current Time (updated every 5s):")
+		print(currentSongTime)
+		print()
+		print("Hybrid Time Left (constant):")
 		print(timerCurrent)
 		sleep(1)
 
@@ -194,17 +206,21 @@ def hybridTimer():
 
 
 def start():
-	getAPI()
+	trueBool = (True)
+	while trueBool == (True):
+		getPlatform()
 
-	functionAPI()
+		getAPI()
 
-	getSongLength()
+		functionAPI()
 
-	getSongTimeLeft()
+		getSongLength()
 
-	getSongTimeCurrent()
+		getSongTimeLeft()
 
-	hybridTimer()
+		getSongTimeCurrent()
+
+		hybridTimer()
 
 
 if __name__ == ("__main__"):
