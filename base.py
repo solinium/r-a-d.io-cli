@@ -14,7 +14,6 @@ def getPlatform():
 
 	global isTravis
 	isTravis = 'TRAVIS' in environ
-	print(isTravis)
 
 
 def keyboard():
