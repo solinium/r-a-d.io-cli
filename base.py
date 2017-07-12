@@ -6,14 +6,15 @@ def getPlatform():
 	from sys import platform
 
 	global unix
-	global isTravis
 	if platform == ('linux') or ('darwin') or ('freebsd') or (
 		'cygwin') or ('posix'):
 			unix = (True)
 	else:
 		unix = (False)
 
-	isTravis = environ['TRAVIS']
+	global isTravis
+	isTravis = 'TRAVIS' in environ
+	print(isTravis)
 
 
 def keyboard():
@@ -223,6 +224,7 @@ def hybridTimer():
 
 def start():
 	getPlatform()
+
 	keyboard()
 
 	trueBool = (True)
