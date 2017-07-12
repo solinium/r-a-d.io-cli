@@ -13,7 +13,7 @@ def getPlatform():
 	else:
 		unix = (False)
 
-	isTravis = environ.get('TRAVIS')
+	isTravis = environ['TRAVIS']
 
 
 def keyboard():
