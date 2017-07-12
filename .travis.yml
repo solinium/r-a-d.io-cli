@@ -18,7 +18,7 @@ notifications:
     on_failure: never
 
 install:
-  - pip3 install -r requirements.txt
+  - sudo pip3 install -r requirements.txt
 
 script:
   - sudo python3 base.py
