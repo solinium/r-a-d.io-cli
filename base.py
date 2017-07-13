@@ -6,9 +6,13 @@ def getPlatform():
 	from sys import platform
 
 	global unix
-	if platform == ('linux') or ('darwin') or ('freebsd') or (
-		'cygwin') or ('posix'):
-			unix = (True)
+	if platform.startswith('linux') == (True) or (
+		platform.startswith('darwin')) == (True) or (
+			platform.startswith('freebsd')) == (True) or (
+				platform.startswith('openbsd')) == (True) or (
+					platform.startswith('cygwin')) == (True) or (
+						platform.startswith('posix')) == (True):
+							unix = (True)
 	else:
 		unix = (False)
 
@@ -27,7 +31,9 @@ def getAPI():
 	from requests import get
 
 	apiurl = ("https://r-a-d.io/api")
-	apiraw = get(url=apiurl, headers={'User-agent': 'Mozilla/5.0'})
+	useragent = ("Mozilla/5.0")
+	apiraw = get(url=apiurl, headers={'User-agent': useragent})
+
 	global api
 	api = apiraw.json()
 
@@ -66,11 +72,9 @@ def getAPI():
 
 
 def functionAPI():
-	global isAfkStreamStr
 	if isAfkStream == (True):
-		isAfkStreamStr = ("AFK Stream")
-	else:
-		isAfkStreamStr = ("")
+		global isAfkStreamStr
+		isAfkStreamStr = ("Automated Stream")
 
 	global isOldThread
 	if threadUrl != (""):
@@ -199,20 +203,19 @@ def hybridTimer():
 		elif unix == (False):
 			system('cls')
 
-		print("Title:")
 		print(songTitle)
 		print()
-		print("Length:")
-		print(songLength)
-		print()
-		print("Time Left (updated every 5s):")
-		print(songTimeLeft)
-		print()
-		print("Current Time (updated every 5s):")
-		print(currentSongTime)
-		print()
-		print("Hybrid Time Left (constant):")
 		print(timerCurrent)
+		print("\n" * 5)
+		print("DJ: %s") % (djName)
+
+		try:
+			print(isAfkStreamStr)
+			print()
+		except:
+			print()
+
+		print("Listeners: %s") % (listeners)
 		sleep(1)
 
 # songLength is song length
