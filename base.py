@@ -20,13 +20,6 @@ def getPlatform():
 	isTravis = 'TRAVIS' in environ
 
 
-def keyboard():
-	if isTravis != (True):
-		from keyboard import wait
-		print("Press space to start!")
-		wait('space')
-
-
 def getAPI():
 	from requests import get
 
@@ -171,10 +164,17 @@ def hybridTimer():
 	else:
 		system('cls')
 
-	while (timerCurrentSeconds < timerMax):
-		timerCurrentSeconds = (timerCurrentSeconds + 1)
+	print("Press ctrl+c to exit.")
+	sleep(3)
 
-		if (timerCurrentSeconds % 5) == (0) or timerCurrentSeconds == (
+	if unix == (True):
+		system('clear')
+	else:
+		system('cls')
+
+	trueBool = (True)
+	while (trueBool == (True)):
+		if (timerCurrentSeconds % 10) == (0) or timerCurrentSeconds == (
 			timerMax) or tempTitle != (
 				songTitle):
 					getAPI()
@@ -184,6 +184,8 @@ def hybridTimer():
 					getSongTimeCurrent()
 					timerCurrentSeconds = (currentSongcTime)
 					timerMax = songLengthSeconds
+		else:
+			timerCurrentSeconds = (timerCurrentSeconds + 1)
 
 		timerCurrentReadable = str(
 			timedelta(seconds=timerCurrentSeconds))
@@ -208,13 +210,15 @@ def hybridTimer():
 		print()
 		print("DJ: %s" % (djName))
 
-		try:
+		if isAfkStream == (True):
 			print(isAfkStreamStr)
-			print()
-		except:
-			print()
 
+		print()
 		print("Listeners: %s" % (listeners))
+
+		if (isTravis == (True)):
+			trueBool = (False)
+
 		sleep(1)
 
 # songLength is song length
@@ -226,35 +230,17 @@ def hybridTimer():
 def start():
 	getPlatform()
 
-	keyboard()
+	getAPI()
 
-	if isTravis == (True):
-		getAPI()
+	functionAPI()
 
-		functionAPI()
+	getSongLength()
 
-		getSongLength()
+	getSongTimeLeft()
 
-		getSongTimeLeft()
+	getSongTimeCurrent()
 
-		getSongTimeCurrent()
-
-		hybridTimer()
-
-	else:
-		trueBool = (True)
-		while trueBool == (True):
-			getAPI()
-
-			functionAPI()
-
-			getSongLength()
-
-			getSongTimeLeft()
-
-			getSongTimeCurrent()
-
-			hybridTimer()
+	hybridTimer()
 
 
 if __name__ == ("__main__"):
