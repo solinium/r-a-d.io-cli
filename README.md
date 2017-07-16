@@ -1,6 +1,6 @@
-# **a lightweight client base for [r/a/dio](https://r-a-d.io)** 
+# **a lightweight command-line client for [r/a/dio](https://r-a-d.io)** 
 
-[![Build Status](https://travis-ci.org/solinium/r-a-d.io-base.svg?branch=master)](https://travis-ci.org/solinium/r-a-d.io-base)
+[![Build Status](https://travis-ci.org/solinium/r-a-d.io-cli.svg?branch=master)](https://travis-ci.org/solinium/r-a-d.io-cli)
 
 Written in python 3.5 using r/a/dio's JSON API
 
