@@ -1,13 +1,14 @@
 dist: trusty
+sudo: required
+
 language: python
 python:
   - "3.4"
   - "3.5"
   - "3.6"
+
 os:
   - linux
-env:
-  - TARGET_ARCH=x64
 
 notifications:
   email:
@@ -16,8 +17,12 @@ notifications:
     on_success: never
     on_failure: never
 
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y python3-requests
+
 install:
-  - pip install -r requirements.txt
+  - pip3 install -r requirements.txt
 
 script:
-  - python base.py
+  - sudo python3 base.py

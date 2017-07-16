@@ -1,15 +1,42 @@
 #!/usr/bin/env python3
 
 
+def getPlatform():
+	from os import environ
+	from sys import platform
+
+	global unix
+	if platform.startswith('linux') == (True) or (
+		platform.startswith('darwin')) == (True) or (
+			platform.startswith('freebsd')) == (True) or (
+				platform.startswith('openbsd')) == (True) or (
+					platform.startswith('cygwin')) == (True) or (
+						platform.startswith('posix')) == (True):
+							unix = (True)
+	else:
+		unix = (False)
+
+	global isTravis
+	isTravis = 'TRAVIS' in environ
+
+
+def keyboard():
+	if isTravis != (True):
+		from keyboard import wait
+		print("Press space to start!")
+		wait('space')
+
+
 def getAPI():
 	from requests import get
+
 	apiurl = ("https://r-a-d.io/api")
-	apiraw = get(url=apiurl, headers={'User-agent': 'Mozilla/5.0'})
+	useragent = ("Mozilla/5.0")
+	apiraw = get(url=apiurl, headers={'User-agent': useragent})
+
 	global api
 	api = apiraw.json()
 
-
-def readAPI():
 	global djName
 	djName = api['main']['dj']['djname']
 
@@ -44,12 +71,10 @@ def readAPI():
 	currentTime = api['main']['current']
 
 
-def functionsAPI():
-	global isAfkStreamStr
+def functionAPI():
 	if isAfkStream == (True):
-		isAfkStreamStr = ("AFK Stream")
-	else:
-		isAfkStreamStr = ("")
+		global isAfkStreamStr
+		isAfkStreamStr = ("Automated Stream")
 
 	global isOldThread
 	if threadUrl != (""):
@@ -64,9 +89,13 @@ def functionsAPI():
 	else:
 		isThreadUp = (False)
 
+	global tempTitle
+	tempTitle = songTitle
+
 
 def getSongLength():
 	from datetime import timedelta
+
 	global songLengthSeconds
 	songLengthSeconds = (endTime - startTime)
 
@@ -84,6 +113,7 @@ def getSongLength():
 
 def getSongTimeLeft():
 	from datetime import timedelta
+
 	global songcTimeLeft
 	songcTimeLeft = endTime - currentTime
 
@@ -106,6 +136,7 @@ def getSongTimeLeft():
 
 def getSongTimeCurrent():
 	from datetime import timedelta
+
 	global currentSongcTime
 	currentSongcTime = (songLengthSeconds - songcTimeLeft)
 
@@ -114,62 +145,116 @@ def getSongTimeCurrent():
 
 	tempCurrentSongcTime = readableCurrentSongcTime[2:3]
 
-	if tempCurrentSongcTime == (0):
-		formattedCurrentSongcTime = readableCurrentSongcTime[2:7]
-	else:
-		formattedCurrentSongcTime = readableCurrentSongcTime[3:7]
-
-	formattedCurrentSongcTime = ("%s/%s") % (
-		formattedCurrentSongcTime, songLength)
-
 	global currentSongTime
-	currentSongTime = formattedCurrentSongcTime
+	if tempCurrentSongcTime == (0):
+		currentSongTime = readableCurrentSongcTime[2:7]
+	else:
+		currentSongTime = readableCurrentSongcTime[3:7]
 
-	# songLength is song length
-	# currentSongTime is how far in the song
-	# songTimeLeft is how much time is left
+	currentSongTime = ("%s/%s") % (
+		currentSongTime, songLength)
 
 
-def testing():
+def hybridTimer():
 	from os import system
-	from sys import platform
+	from time import sleep
+	from datetime import timedelta
 
-	if platform == ('darwin'):
-		system('clear')
-	elif platform == ('posix'):
-		system('clear')
-	elif platform == ('linux'):
+	global timerCurrent
+	global timerCurrentSeconds
+
+	timerCurrentSeconds = (currentSongcTime)
+	timerMax = songLengthSeconds
+
+	if unix == (True):
 		system('clear')
 	else:
 		system('cls')
 
-	print("Title:")
-	print(songTitle)
-	print()
-	print("Length:")
-	print(songLength)
-	print()
-	print("Current Time:")
-	print(currentSongTime)
-	print()
-	print("Time Left:")
-	print(songTimeLeft)
+	while (timerCurrentSeconds < timerMax):
+		timerCurrentSeconds = (timerCurrentSeconds + 1)
+
+		if (timerCurrentSeconds % 5) == (0) or timerCurrentSeconds == (
+			timerMax) or tempTitle != (
+				songTitle):
+					getAPI()
+					functionAPI()
+					getSongLength()
+					getSongTimeLeft()
+					getSongTimeCurrent()
+					timerCurrentSeconds = (currentSongcTime)
+					timerMax = songLengthSeconds
+
+		timerCurrentReadable = str(
+			timedelta(seconds=timerCurrentSeconds))
+
+		timerCurrentTemp = timerCurrentReadable[2:3]
+
+		if timerCurrentTemp == (0):
+			timerCurrent = timerCurrentReadable[2:7]
+		else:
+			timerCurrent = timerCurrentReadable[3:7]
+
+		timerCurrent = ("%s/%s") % (
+			timerCurrent, songLength)
+
+		if unix == (True):
+			system('clear')
+		elif unix == (False):
+			system('cls')
+
+		print(songTitle)
+		print(timerCurrent)
+		print()
+		print("DJ: %s" % (djName))
+
+		try:
+			print(isAfkStreamStr)
+			print()
+		except:
+			print()
+
+		print("Listeners: %s" % (listeners))
+		sleep(1)
+
+# songLength is song length
+# currentSongTime is how far in the song
+# songTimeLeft is how much time is left
+# timerCurrent is current song time (hybrid)
 
 
 def start():
-	getAPI()
+	getPlatform()
 
-	readAPI()
+	keyboard()
 
-	functionsAPI()
+	if isTravis == (True):
+		getAPI()
 
-	getSongLength()
+		functionAPI()
 
-	getSongTimeLeft()
+		getSongLength()
 
-	getSongTimeCurrent()
+		getSongTimeLeft()
 
-	# testing()
+		getSongTimeCurrent()
+
+		hybridTimer()
+
+	else:
+		trueBool = (True)
+		while trueBool == (True):
+			getAPI()
+
+			functionAPI()
+
+			getSongLength()
+
+			getSongTimeLeft()
+
+			getSongTimeCurrent()
+
+			hybridTimer()
 
 
 if __name__ == ("__main__"):

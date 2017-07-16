@@ -11,6 +11,4 @@ If you don't have pip3, install the python3-pip package with your respective pac
 
 At the moment, this is only tested in Linux
 
-**Currently stable, very basic functionality is working**
-
 **Non-stable commits are made in the development branch**
