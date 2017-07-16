@@ -9,6 +9,8 @@ requires requests:
 
 If you don't have pip3, install the python3-pip package with your respective package manager
 
+requires mpv, install the mpv package with your respective package manager
+
 At the moment, this is only tested in Linux
 
 **Non-stable commits are made in the development branch**

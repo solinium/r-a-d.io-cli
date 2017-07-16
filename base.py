@@ -164,6 +164,14 @@ def hybridTimer():
 	else:
 		system('cls')
 
+	print("Press ctrl+c to exit.")
+	sleep(3)
+
+	if unix == (True):
+		system('clear')
+	else:
+		system('cls')
+
 	trueBool = (True)
 	while (trueBool == (True)):
 		if (timerCurrentSeconds % 10) == (0) or timerCurrentSeconds == (
