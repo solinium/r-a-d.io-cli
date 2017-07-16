@@ -16,8 +16,13 @@ notifications:
     on_success: never
     on_failure: never
 
+addons:
+  apt:
+    packages:
+    - mpv
+
 install:
   - pip install requests
 
 script:
-  - python base.py
+  - bash start.sh
