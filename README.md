@@ -11,6 +11,9 @@ If you don't have pip3, install the python3-pip package with your respective pac
 
 requires mpv, install the mpv package with your respective package manager
 
+To install:
+After installing the required dependencies, download the latest release and run start.sh 
+
 At the moment, this is only tested in Linux
 
 **Non-stable commits are made in the development branch**
