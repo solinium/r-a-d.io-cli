@@ -1,5 +1,4 @@
 dist: trusty
-sudo: required
 
 language: python
 python:
@@ -17,12 +16,8 @@ notifications:
     on_success: never
     on_failure: never
 
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y python3-requests
-
 install:
-  - pip3 install -r requirements.txt
+  - pip install requests
 
 script:
-  - sudo python3 base.py
+  - python base.py

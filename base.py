@@ -20,13 +20,6 @@ def getPlatform():
 	isTravis = 'TRAVIS' in environ
 
 
-def keyboard():
-	if isTravis != (True):
-		from keyboard import wait
-		print("Press space to start!")
-		wait('space')
-
-
 def getAPI():
 	from requests import get
 
@@ -208,12 +201,10 @@ def hybridTimer():
 		print()
 		print("DJ: %s" % (djName))
 
-		try:
+		if isAfkStream == (True):
 			print(isAfkStreamStr)
-			print()
-		except:
-			print()
 
+		print()
 		print("Listeners: %s" % (listeners))
 		sleep(1)
 
@@ -225,8 +216,6 @@ def hybridTimer():
 
 def start():
 	getPlatform()
-
-	keyboard()
 
 	if isTravis == (True):
 		getAPI()
