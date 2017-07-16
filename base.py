@@ -204,10 +204,9 @@ def hybridTimer():
 			system('cls')
 
 		print(songTitle)
-		print()
 		print(timerCurrent)
-		print("\n" * 5)
-		print(djName)
+		print()
+		print("DJ: %s" % (djName))
 
 		try:
 			print(isAfkStreamStr)
@@ -229,8 +228,7 @@ def start():
 
 	keyboard()
 
-	trueBool = (True)
-	while trueBool == (True):
+	if isTravis == (True):
 		getAPI()
 
 		functionAPI()
@@ -242,6 +240,21 @@ def start():
 		getSongTimeCurrent()
 
 		hybridTimer()
+
+	else:
+		trueBool = (True)
+		while trueBool == (True):
+			getAPI()
+
+			functionAPI()
+
+			getSongLength()
+
+			getSongTimeLeft()
+
+			getSongTimeCurrent()
+
+			hybridTimer()
 
 
 if __name__ == ("__main__"):
