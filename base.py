@@ -207,7 +207,7 @@ def hybridTimer():
 		print()
 		print(timerCurrent)
 		print("\n" * 5)
-		print("DJ: %s") % (djName)
+		print(djName)
 
 		try:
 			print(isAfkStreamStr)
@@ -215,7 +215,7 @@ def hybridTimer():
 		except:
 			print()
 
-		print("Listeners: %s") % (listeners)
+		print("Listeners: %s" % (listeners))
 		sleep(1)
 
 # songLength is song length
