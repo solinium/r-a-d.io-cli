@@ -33,12 +33,6 @@ def getAPI():
 	global djName
 	djName = api['main']['dj']['djname']
 
-	global djImage
-	djImage = api['main']['dj']['djimage']
-
-	global djDescription
-	djDescription = api['main']['dj']['djtext']
-
 	global isAfkStream
 	isAfkStream = api['main']['isafkstream']
 
@@ -50,9 +44,6 @@ def getAPI():
 
 	global songTitle
 	songTitle = api['main']['np']
-
-	global requesting
-	requesting = api['main']['requesting']
 
 	global startTime
 	startTime = api['main']['start_time']
