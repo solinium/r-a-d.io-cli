@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
+from os import system
+from os import environ
+from sys import platform
+from time import sleep
+from requests import get
+from datetime import timedelta
+
 
 def getPlatform():
-	from os import environ
-	from sys import platform
 
 	global unix
 	if platform.startswith('linux') == (True) or (
@@ -21,7 +26,6 @@ def getPlatform():
 
 
 def getAPI():
-	from requests import get
 
 	apiurl = ("https://r-a-d.io/api")
 	useragent = ("Mozilla/5.0")
@@ -65,6 +69,7 @@ def getAPI():
 
 
 def functionAPI():
+
 	if isAfkStream == (True):
 		global isAfkStreamStr
 		isAfkStreamStr = ("Automated Stream")
@@ -84,7 +89,6 @@ def functionAPI():
 
 
 def getSongLength():
-	from datetime import timedelta
 
 	global songLengthSeconds
 	songLengthSeconds = (endTime - startTime)
@@ -102,7 +106,6 @@ def getSongLength():
 
 
 def getSongTimeLeft():
-	from datetime import timedelta
 
 	global songcTimeLeft
 	songcTimeLeft = endTime - currentTime
@@ -125,7 +128,6 @@ def getSongTimeLeft():
 
 
 def getSongTimeCurrent():
-	from datetime import timedelta
 
 	global currentSongcTime
 	currentSongcTime = (songLengthSeconds - songcTimeLeft)
@@ -146,9 +148,6 @@ def getSongTimeCurrent():
 
 
 def hybridTimer():
-	from os import system
-	from time import sleep
-	from datetime import timedelta
 
 	global timerCurrent
 	global timerCurrentSeconds
@@ -173,7 +172,7 @@ def hybridTimer():
 
 	trueBool = (True)
 	while (trueBool == (True)):
-		if (timerCurrentSeconds % 10) == (0) or timerCurrentSeconds == (
+		if (timerCurrentSeconds % 7) == (0) or timerCurrentSeconds == (
 			timerMax) or tempTitle != (
 				songTitle):
 					getAPI()
@@ -228,6 +227,7 @@ def hybridTimer():
 
 
 def start():
+
 	getPlatform()
 
 	getAPI()
