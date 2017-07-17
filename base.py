@@ -82,9 +82,6 @@ def functionAPI():
 	else:
 		isThreadUp = (False)
 
-	global tempTitle
-	tempTitle = songTitle
-
 
 def getSongLength():
 	from datetime import timedelta
@@ -155,9 +152,11 @@ def hybridTimer():
 
 	global timerCurrent
 	global timerCurrentSeconds
+	global tempTitle
 
 	timerCurrentSeconds = (currentSongcTime)
 	timerMax = songLengthSeconds
+	tempTitle = songTitle
 
 	if unix == (True):
 		system('clear')
@@ -184,6 +183,7 @@ def hybridTimer():
 					getSongTimeCurrent()
 					timerCurrentSeconds = (currentSongcTime)
 					timerMax = songLengthSeconds
+					tempTitle = songTitle
 		else:
 			timerCurrentSeconds = (timerCurrentSeconds + 1)
 
