@@ -1,0 +1,6 @@
+#!/bin/sh
+
+python /opt/r-a-d.io-cli/audio.py &
+python /opt/r-a-d.io-cli/cli.py                 
+clear
+
