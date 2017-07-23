@@ -157,73 +157,109 @@ def hybridTimer():
 	timerMax = songLengthSeconds
 	tempTitle = songTitle
 
-	if unix == (True):
-		system('clear')
-	else:
-		system('cls')
+	clear()
 
 	print("Press ctrl+c to exit.")
 	sleep(3)
 
+	clear()
+
+	trueBool = (True)
+	if (isTravis != (True)):
+		while (trueBool == (True)):
+			if (timerCurrentSeconds % 7) == (0) or timerCurrentSeconds == (
+				timerMax) or tempTitle != (
+					songTitle):
+						getAPI()
+						functionAPI()
+						getSongLength()
+						getSongTimeLeft()
+						getSongTimeCurrent()
+						timerCurrentSeconds = (currentSongcTime)
+						timerMax = songLengthSeconds
+						tempTitle = songTitle
+			else:
+				timerCurrentSeconds = (timerCurrentSeconds + 1)
+
+			timerCurrentReadable = str(
+				timedelta(seconds=timerCurrentSeconds))
+
+			timerCurrentTemp = timerCurrentReadable[2:3]
+
+			if timerCurrentTemp == (0):
+				timerCurrent = timerCurrentReadable[2:7]
+			else:
+				timerCurrent = timerCurrentReadable[3:7]
+
+			timerCurrent = ("%s/%s") % (
+				timerCurrent, songLength)
+
+			clear()
+
+			print(songTitle)
+			print(timerCurrent)
+			print()
+			print("DJ: %s" % (djName))
+
+			if isAfkStream == (True):
+				print(isAfkStreamStr)
+
+			print()
+			print("Listeners: %s" % (listeners))
+
+			sleep(1)
+
+	else:
+		while (trueBool == (True)):
+			if (timerCurrentSeconds % 7) == (0) or timerCurrentSeconds == (
+				timerMax) or tempTitle != (
+					songTitle):
+						getAPI()
+						functionAPI()
+						getSongLength()
+						getSongTimeLeft()
+						getSongTimeCurrent()
+						timerCurrentSeconds = (currentSongcTime)
+						timerMax = songLengthSeconds
+						tempTitle = songTitle
+			else:
+				timerCurrentSeconds = (timerCurrentSeconds + 1)
+
+			timerCurrentReadable = str(
+				timedelta(seconds=timerCurrentSeconds))
+
+			timerCurrentTemp = timerCurrentReadable[2:3]
+
+			if timerCurrentTemp == (0):
+				timerCurrent = timerCurrentReadable[2:7]
+			else:
+				timerCurrent = timerCurrentReadable[3:7]
+
+			timerCurrent = ("%s/%s") % (
+				timerCurrent, songLength)
+
+			clear()
+
+			print(songTitle)
+			print(timerCurrent)
+			print()
+			print("DJ: %s" % (djName))
+
+			if isAfkStream == (True):
+				print(isAfkStreamStr)
+
+			print()
+			print("Listeners: %s" % (listeners))
+
+			trueBool = (False)
+
+
+def clear():
+
 	if unix == (True):
 		system('clear')
 	else:
 		system('cls')
-
-	trueBool = (True)
-	while (trueBool == (True)):
-		if (timerCurrentSeconds % 7) == (0) or timerCurrentSeconds == (
-			timerMax) or tempTitle != (
-				songTitle):
-					getAPI()
-					functionAPI()
-					getSongLength()
-					getSongTimeLeft()
-					getSongTimeCurrent()
-					timerCurrentSeconds = (currentSongcTime)
-					timerMax = songLengthSeconds
-					tempTitle = songTitle
-		else:
-			timerCurrentSeconds = (timerCurrentSeconds + 1)
-
-		timerCurrentReadable = str(
-			timedelta(seconds=timerCurrentSeconds))
-
-		timerCurrentTemp = timerCurrentReadable[2:3]
-
-		if timerCurrentTemp == (0):
-			timerCurrent = timerCurrentReadable[2:7]
-		else:
-			timerCurrent = timerCurrentReadable[3:7]
-
-		timerCurrent = ("%s/%s") % (
-			timerCurrent, songLength)
-
-		if unix == (True):
-			system('clear')
-		elif unix == (False):
-			system('cls')
-
-		print(songTitle)
-		print(timerCurrent)
-		print()
-		print("DJ: %s" % (djName))
-
-		if isAfkStream == (True):
-			print(isAfkStreamStr)
-
-		print()
-		print("Listeners: %s" % (listeners))
-
-		if (isTravis == (True)):
-			trueBool = (False)
-
-		sleep(1)
-
-# songLength is song length
-# currentSongTime is how far in the song
-# songTimeLeft is how much time is left
-# timerCurrent is current song time (hybrid)
 
 
 def start():
