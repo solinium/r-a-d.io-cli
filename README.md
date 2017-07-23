@@ -12,7 +12,6 @@ At the moment, this is only tested on Linux.
 ```
 sudo apt-get install python3-pip mpv curl
 sudo pip3 -U install requests
-
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
