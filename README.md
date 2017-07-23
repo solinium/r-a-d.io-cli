@@ -10,7 +10,7 @@ At the moment, this is only tested on Linux.
 
 ##### Debian & Ubuntu:
 ```
-sudo apt-get install python3-pip mpv
+sudo apt-get install python3-pip mpv curl
 sudo pip3 -U install requests
 
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
@@ -20,14 +20,14 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/in
 
 ##### Fedora:
 ```
-sudo dnf install python3-pip mpv
+sudo dnf install python3-pip mpv curl
 sudo pip3 -U install requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
-##### Fedora:
+##### Arch Linux:
 ```
-sudo pacman -S python-pip mpv
+sudo pacman -S python-pip mpv curl
 sudo pip -U install requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
