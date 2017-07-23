@@ -2,6 +2,7 @@
 
 from os import system
 from os import environ
+from sys import exit
 from sys import platform
 from time import sleep
 from requests import get
@@ -279,5 +280,11 @@ def start():
 	hybridTimer()
 
 
-if __name__ == ("__main__"):
-	start()
+try:
+	if __name__ == ("__main__"):
+		start()
+		clear()
+
+except (KeyboardInterrupt):
+	clear()
+	exit()
