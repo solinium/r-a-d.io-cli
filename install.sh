@@ -9,21 +9,9 @@ sudo cp $HOME/r-a-d.io-cli/audio.py /opt/r-a-d.io-cli/audio.py
 ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
 
 if [ $ret -eq 0 ]; then
-	{
-	sudo echo '#!/bin/sh'
-	sudo echo 'python /opt/r-a-d.io-cli/audio.py &'
-	sudo echo 'python /opt/r-a-d.io-cli/cli.py'                    
-	sudo echo 'clear'
-	} >/usr/bin/radiocli
-
+	sudo cp $HOME/r-a-d.io-cli/install/p2 /usr/bin/radiocli
 else 
-	{
-	sudo echo '#!/bin/sh'
-	sudo echo 'python3 /opt/r-a-d.io-cli/audio.py &'
-	sudo echo 'python3 /opt/r-a-d.io-cli/cli.py'                    
-	sudo echo 'clear'
-	} >/usr/bin/radiocli
-
+	sudo cp $HOME/r-a-d.io-cli/install/p3 /usr/bin/radiocli
 fi
 
 sudo chmod +x /usr/bin/radiocli
