@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/solinium/r-a-d.io-cli.svg?branch=master)](https://travis-ci.org/solinium/r-a-d.io-cli)
 
-Written in Python 3 using r/a/dio's JSON API.
+Written in Python 3 using r/a/dio's [API](https://r-a-d.io/api).
 
 At the moment, this is only tested on Linux.
 
@@ -30,6 +30,9 @@ sudo pacman -S python-pip mpv curl
 sudo pip -U install requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
+
+### Uninstall
+`bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)`
 
 ### Contributing
 Unstable or testing commits are made in the development branch. Follow PEP8.
