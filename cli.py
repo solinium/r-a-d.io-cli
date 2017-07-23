@@ -15,11 +15,12 @@ def getPlatform():
 	if platform.startswith('linux') == (True) or (
 		platform.startswith('darwin')) == (True) or (
 			platform.startswith('freebsd')) == (True) or (
-				platform.startswith('openbsd')) == (True) or (
-					platform.startswith('cygwin')) == (True) or (
-						platform.startswith('posix')) == (True):
-							unix = (True)
-	else:
+				platform.startswith('cygwin')) == (True) or (
+					platform.startswith('riscos')) == (True) or (
+						platform.startswith('atheos')) == (True) or (
+							platform.startswith('os2')) == (True):
+								unix = (True)
+	elif platform.startswith('win') == (True):
 		unix = (False)
 
 	global isTravis
