@@ -34,5 +34,8 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/in
 ### Uninstall
 `bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)`
 
+### Issues
+You may notice the timer jumping frequently. That's because by default API requests are being sent every 7 seconds, so it is likely that either your connection or r/a/dio is being slow. I will work on implementing custom request times.
+
 ### Contributing
 Unstable or testing commits are made in the development branch. Follow PEP8.
