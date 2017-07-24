@@ -1,4 +1,21 @@
 #!/bin/sh
 
+while getopts ":t:" opt; do
+  case $opt in
+    t)
+      frequency=$OPTARG
+      export frequency
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
 python /opt/r-a-d.io-cli/audio.py &
 python /opt/r-a-d.io-cli/cli.py

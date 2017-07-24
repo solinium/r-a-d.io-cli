@@ -26,6 +26,17 @@ def getPlatform():
     global isTravis
     isTravis = 'TRAVIS' in environ
 
+    global updateFrequency
+    try:
+        if environ['frequency'] != (""):
+            updateFrequency = environ['frequency']
+            updateFrequency = int(updateFrequency)
+    except (KeyError):
+        updateFrequency = (5)
+
+    global updateFrequencyFunction
+    updateFrequencyFunction = (100)
+
 
 def getAPI():
 
@@ -88,12 +99,6 @@ def functionAPI():
         isThreadUp = (True)
     else:
         isThreadUp = (False)
-
-    global updateFrequency
-    updateFrequency = (5)
-
-    global updateFrequencyFunction
-    updateFrequencyFunction = (100)
 
 
 def getSongLength():
