@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sudo clear # to immediately prompt sudo pass, visual reasons
 cd $HOME
 git clone https://github.com/solinium/r-a-d.io-cli.git
 sudo mkdir -p /opt/r-a-d.io-cli/
