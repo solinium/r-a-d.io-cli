@@ -11,23 +11,21 @@ At the moment, this is only tested on Linux.
 ##### Debian & Ubuntu:
 ```
 sudo apt-get install python3-pip mpv curl
-sudo pip3 -U install requests
+sudo pip3 install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
-
-
 
 ##### Fedora:
 ```
 sudo dnf install python3-pip mpv curl
-sudo pip3 -U install requests
+sudo pip3 install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### Arch Linux:
 ```
 sudo pacman -S python-pip mpv curl
-sudo pip -U install requests
+sudo pip install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
