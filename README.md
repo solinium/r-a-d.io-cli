@@ -33,7 +33,11 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/in
 `bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)`
 
 ### Issues
-You may notice the timer jumping frequently. That's because by default API requests are being sent every 7 seconds, so it is likely that either your connection or r/a/dio is being slow. I will work on implementing custom request times.
+You may notice the timer jumping frequently. That's because by default API requests are being sent every 5 seconds, so it is likely that either your connection or r/a/dio is being slow. You can call radiocli with the -t option to specify how often it updates. Example:
+
+`radiocli -t 10`
+
+This will update every 10 seconds instead of the default 5.
 
 ### Contributing
 Unstable or testing commits are made in the development branch. Follow PEP8.
