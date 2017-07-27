@@ -10,21 +10,21 @@ At the moment, this is only tested on Linux.
 
 ##### Debian & Ubuntu:
 ```
-sudo apt-get install python3-pip mpv curl
+sudo apt-get install python3-pip xdg-utils mpv curl
 sudo pip3 install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### Fedora:
 ```
-sudo dnf install python3-pip mpv curl
+sudo dnf install python3-pip xdg-utils mpv curl
 sudo pip3 install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### Arch Linux:
 ```
-sudo pacman -S python-pip mpv curl
+sudo pacman -S python-pip xdg-utils mpv curl
 sudo pip install -U requests
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
@@ -35,9 +35,9 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/un
 ```
 
 ### Issues
-You may notice the timer jumping frequently. That's because by default API requests are being sent every 5 seconds, so it is likely that either your connection or r/a/dio is being slow. You can call radiocli with the -t option to specify how often it updates. Example:
+You may notice the timer jumping frequently. That's because by default API requests are being sent every 5 seconds, so it is likely that either your connection or r/a/dio is being slow. You can call radiocli with the -u option to specify how often it updates. Example:
 
-`radiocli -t 10`
+`radiocli -u 10`
 
 This would update the timer every 10 seconds instead of the default 5.
 

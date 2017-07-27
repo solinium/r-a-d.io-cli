@@ -11,7 +11,9 @@ from datetime import timedelta
 
 def getPlatform():
 
+    global win
     global unix
+    global darwin
     if platform.startswith('linux') == (True) or (
         platform.startswith('darwin')) == (True) or (
             platform.startswith('freebsd')) == (True) or (
@@ -20,19 +22,37 @@ def getPlatform():
                         platform.startswith('atheos')) == (True) or (
                             platform.startswith('os2')) == (True):
                                 unix = (True)
+                                win = (False)
+                                if platform.startswith('darwin') == (True):
+                                    darwin = (True)
+                                else:
+                                    darwin = (False)
     elif platform.startswith('win') == (True):
         unix = (False)
+        win = (True)
 
     global isTravis
     isTravis = 'TRAVIS' in environ
 
-    global updateFrequency
+    global updateTime
     try:
         if environ['frequency'] != (""):
-            updateFrequency = environ['frequency']
-            updateFrequency = int(updateFrequency)
+            updateTime = environ['updatetime']
+            updateTime = int(updateTime)
     except (KeyError):
-        updateFrequency = (5)
+        updateTime = (5)
+
+    global openThreadstr
+    global openThreadbool
+    try:
+        if environ['openthread'] != (""):
+            openThreadstr = environ['openthread']
+            if openThreadstr == ("true"):
+                openThreadbool = (True)
+            else:
+                openThreadbool = (False)
+    except (KeyError):
+        openThreadbool = (False)
 
     global updateFrequencyFunction
     updateFrequencyFunction = (100)
@@ -87,16 +107,15 @@ def functionAPI():
         global isAfkStreamStr
         isAfkStreamStr = ("Automated Stream")
 
-    global isOldThread
-    if threadUrl != (""):
-        if djName == ("Hanyuu-sama"):
-            isOldThread = (True)
-        else:
-            isOldThread = (False)
-
     global isThreadUp
-    if isOldThread == (False):
-        isThreadUp = (True)
+    if threadUrl != (""):
+        if threadUrl != ("none"):
+            if djName != ("Hanyuu-sama"):
+                isThreadUp = (True)
+            else:
+                isThreadUp = (False)
+        else:
+            isThreadUp = (False)
     else:
         isThreadUp = (False)
 
@@ -173,16 +192,31 @@ def hybridTimer():
     clear()
 
     print("Press ctrl+c to exit.")
+
+    if openThreadbool == (True):
+        print()
+        if isThreadUp == (False):
+            print("Sorry, thread is not up.")
+        else:
+            print("Opening thread...")
+            if unix == (True):
+                if darwin == (True):
+                    system('open %s' % (threadUrl))
+                else:
+                    system('xdg-open %s' % (threadUrl))
+            elif win == (True):
+                system('cmd /c start %s' % (threadUrl))
     sleep(3)
 
     clear()
     trueBool = (True)
     if (isTravis != (True)):
         while (trueBool == (True)):
-            if (timerCurrentSeconds % updateFrequency) == (
-                0) or timerCurrentSeconds == (timerMax) or tempTitle != (
-                    songTitle):
-                        updateAPI()
+            if (timerCurrentSeconds % updateTime) == (
+                0) or timerCurrentSeconds == (
+                    timerMax) or tempTitle != (
+                        songTitle):
+                            updateAPI()
             else:
                 timerCurrentSeconds = (timerCurrentSeconds + 1)
 
@@ -216,8 +250,8 @@ def hybridTimer():
 
     else:
         while (trueBool == (True)):
-            if (timerCurrentSeconds % updateFrequency
-                ) == (0) or timerCurrentSeconds == (
+            if (timerCurrentSeconds % updateTime) == (
+                0) or timerCurrentSeconds == (
                     timerMax) or tempTitle != (
                         songTitle):
                             updateAPI()
@@ -277,7 +311,10 @@ def clear():
     if unix == (True):
         system('clear')
     elif unix == (False):
-        system('cls')
+        if win == (True):
+            system('cls')
+        else:
+            system('clear')
     else:
         print("Error - Unix not true or false. Please report this.")
 
