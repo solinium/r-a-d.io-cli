@@ -324,11 +324,8 @@ def clear():
 def start():
 
     getPlatform()
-
     updateAPI()
-
     functionAPI()
-
     hybridTimer()
 
 
