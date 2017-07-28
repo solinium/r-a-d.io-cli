@@ -23,13 +23,14 @@ def getPlatform():
                             platform.startswith('os2')) == (True):
                                 unix = (True)
                                 win = (False)
-                                if platform.startswith('darwin') == (True):
-                                    darwin = (True)
-                                else:
-                                    darwin = (False)
     elif platform.startswith('win') == (True):
         unix = (False)
         win = (True)
+
+    if platform.startswith('darwin') == (True):
+        darwin = (True)
+    else:
+        darwin = (False)
 
     global isTravis
     isTravis = 'TRAVIS' in environ
@@ -206,6 +207,7 @@ def hybridTimer():
                     system('xdg-open %s' % (threadUrl))
             elif win == (True):
                 system('cmd /c start %s' % (threadUrl))
+
     sleep(3)
 
     clear()

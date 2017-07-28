@@ -34,12 +34,16 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/in
 bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)
 ```
 
+### Usage
+Call radiocli with -u and a number to choose the interval in which the timer updates, use -t to open the thread (if it exists), and use -h for help. All flags are optional.
+
+
+Example:
+`radiocli -t -u 10`
+
 ### Issues
-You may notice the timer jumping frequently. That's because by default API requests are being sent every 5 seconds, so it is likely that either your connection or r/a/dio is being slow. You can call radiocli with the -u option to specify how often it updates. Example:
+You may notice the timer jumping frequently. That's because by default API requests are being sent every 5 seconds, so it is likely that either your connection or r/a/dio is being slow. You can call radiocli with the -u option to specify how often it updates.
 
-`radiocli -u 10`
-
-This would update the timer every 10 seconds instead of the default 5.
 
 ### Contributing
 Unstable or testing commits are made in the development branch. Follow PEP8.

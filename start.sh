@@ -1,11 +1,7 @@
 #!/bin/sh
 
-while getopts ":h:u:t" opt; do
+while getopts "u:ht" opt; do
   case $opt in
-    h)
-      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread (if it exists), and use -h for help "
-      exit 0
-      ;;
     u)
       updatetime=$OPTARG
       export updatetime
@@ -13,6 +9,10 @@ while getopts ":h:u:t" opt; do
     t)
       openthread=true
       export openthread
+      ;;
+    h)
+      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread (if it exists), and use -h for help."
+      exit 0
       ;;
     \?)
       echo "Invalid option: -$OPTARG. Use radiocli -h for help."
