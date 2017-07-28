@@ -1,15 +1,15 @@
 #!/bin/sh
 
-sudo clear # to immediately prompt sudo pass, visual reasons
+sudo clear # to immediately prompt sudo password, visual reasons
 cd $HOME
 git clone https://github.com/solinium/r-a-d.io-cli.git
 sudo mkdir -p /opt/r-a-d.io-cli/
 sudo cp $HOME/r-a-d.io-cli/cli.py /opt/r-a-d.io-cli/cli.py
 sudo cp $HOME/r-a-d.io-cli/audio.py /opt/r-a-d.io-cli/audio.py
 
-ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+pyver=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
 
-if [ $ret -eq 0 ]; then
+if [ $pyver -eq 0 ]; then
 	sudo cp $HOME/r-a-d.io-cli/installfiles/p2 /usr/bin/radiocli
 else 
 	sudo cp $HOME/r-a-d.io-cli/installfiles/p3 /usr/bin/radiocli
