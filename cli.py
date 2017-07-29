@@ -250,6 +250,7 @@ def hybridTimer():
 
             sleep(1)
 
+    # travis section
     else:
         while (trueBool == (True)):
             if (timerCurrentSeconds % updateTime) == (
