@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
+import requests
 from os import system
 from os import environ
 from sys import exit
 from sys import platform
 from time import sleep
-from requests import get
 from datetime import timedelta
 
 
@@ -63,7 +63,13 @@ def getAPI():
 
     apiurl = ("https://r-a-d.io/api")
     useragent = ("Mozilla/5.0")
-    apiraw = get(url=apiurl, headers={'User-agent': useragent})
+    try:
+        apiraw = requests.get(url=apiurl, headers={'User-agent': useragent})
+    except (requests.ConnectionError):
+        clear()
+        print("Connection error, retrying in 5 seconds...")
+        sleep(5)
+        start()
 
     global api
     api = apiraw.json()
@@ -322,7 +328,7 @@ def clear():
         print("Error - Unix not true or false. Please report this.")
 
 
-def start():
+def body():
 
     getPlatform()
     updateAPI()
@@ -330,11 +336,15 @@ def start():
     hybridTimer()
 
 
-try:
-    if __name__ == ("__main__"):
-        start()
-        clear()
+def start():
+    try:
+        if __name__ == ("__main__"):
+            body()
+            clear()
 
-except (KeyboardInterrupt):
-    clear()
-    exit(0)
+    except (KeyboardInterrupt):
+        clear()
+        exit(0)
+
+
+start()
