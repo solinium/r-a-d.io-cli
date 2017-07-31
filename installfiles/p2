@@ -26,4 +26,4 @@ while getopts "u:ht" opt; do
 done
 
 mpv --no-video --really-quiet --user-agent 'Mozilla/5.0' https://relay0.r-a-d.io/main.mp3 &
-python /opt/r-a-d.io-cli/cli.py
+python /etc/r-a-d.io-cli/cli.py
