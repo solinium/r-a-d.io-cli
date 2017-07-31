@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
-import requests
 from os import system
 from os import environ
 from sys import exit
 from sys import platform
 from time import sleep
 from datetime import timedelta
+from requests import get
+from requests import ConnectionError
 
 
 def getPlatform():
@@ -64,8 +65,8 @@ def getAPI():
     apiurl = ("https://r-a-d.io/api")
     useragent = ("Mozilla/5.0")
     try:
-        apiraw = requests.get(url=apiurl, headers={'User-agent': useragent})
-    except (requests.ConnectionError):
+        apiraw = get(url=apiurl, headers={'User-agent': useragent})
+    except (ConnectionError):
         clear()
         print("Connection error, retrying in 5 seconds...")
         sleep(5)
