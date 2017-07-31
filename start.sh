@@ -25,5 +25,5 @@ while getopts "u:ht" opt; do
   esac
 done
 
-python3 audio.py &
+mpv --no-video --really-quiet https://relay0.r-a-d.io/main.mp3 &
 python3 cli.py

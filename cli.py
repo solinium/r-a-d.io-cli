@@ -5,8 +5,9 @@ from os import environ
 from sys import exit
 from sys import platform
 from time import sleep
-from requests import get
 from datetime import timedelta
+from requests import get
+from requests import ConnectionError
 
 
 def getPlatform():
@@ -63,7 +64,13 @@ def getAPI():
 
     apiurl = ("https://r-a-d.io/api")
     useragent = ("Mozilla/5.0")
-    apiraw = get(url=apiurl, headers={'User-agent': useragent})
+    try:
+        apiraw = get(url=apiurl, headers={'User-agent': useragent})
+    except (ConnectionError):
+        clear()
+        print("Connection error, retrying in 5 seconds...")
+        sleep(5)
+        start()
 
     global api
     api = apiraw.json()
@@ -250,6 +257,7 @@ def hybridTimer():
 
             sleep(1)
 
+    # travis section
     else:
         while (trueBool == (True)):
             if (timerCurrentSeconds % updateTime) == (
@@ -321,22 +329,23 @@ def clear():
         print("Error - Unix not true or false. Please report this.")
 
 
-def start():
+def body():
 
     getPlatform()
-
     updateAPI()
-
     functionAPI()
-
     hybridTimer()
 
 
-try:
-    if __name__ == ("__main__"):
-        start()
-        clear()
+def start():
+    try:
+        if __name__ == ("__main__"):
+            body()
+            clear()
 
-except (KeyboardInterrupt):
-    clear()
-    exit(0)
+    except (KeyboardInterrupt):
+        clear()
+        exit(0)
+
+
+start()
