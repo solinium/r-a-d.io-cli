@@ -25,5 +25,4 @@ while getopts "u:ht" opt; do
   esac
 done
 
-mpv --no-video --really-quiet --user-agent 'Mozilla/5.0' https://relay0.r-a-d.io/main.mp3 &
-python3 cli.py
+python3 radio.py
