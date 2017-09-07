@@ -1,11 +1,10 @@
 #!/bin/sh
 
-sudo clear # to immediately prompt sudo password, visual reasons
+sudo clear # to immediately prompt sudo password
 cd /tmp
 git clone https://github.com/solinium/r-a-d.io-cli.git
 sudo mkdir -p /etc/r-a-d.io-cli/
-sudo cp /tmp/r-a-d.io-cli/cli.py /etc/r-a-d.io-cli/cli.py
-sudo cp /etc/r-a-d.io-cli/audio.py /etc/r-a-d.io-cli/audio.py
+sudo cp /tmp/r-a-d.io-cli/radio.py /etc/r-a-d.io-cli/radio.py
 
 pyver=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
 

@@ -6,8 +6,30 @@ from sys import exit
 from sys import platform
 from time import sleep
 from datetime import timedelta
-from requests import get
+from requests import get as rget
 from requests import ConnectionError
+
+
+def audio():
+
+    audiourl = ('https://relay0.r-a-d.io/main.mp3')
+    ipcfile = ('--input-ipc-server=/tmp/mpvsocket')
+    miscparams = ('--pause --no-video --really-quiet')
+    system('mpv %s %s %s &' % (miscparams, ipcfile, audiourl))
+
+
+def pause():
+
+    pausestr = ('''echo '{ "command": ["set_property", "pause", true] }' | socat - /tmp/mpvsocket''')
+    clear()
+    system(pausestr)
+
+
+def unpause():
+
+    unpausestr = ('''echo '{ "command": ["set_property", "pause", false] }' | socat - /tmp/mpvsocket''')
+    clear()
+    system(unpausestr)
 
 
 def getPlatform():
@@ -65,12 +87,13 @@ def getAPI():
     apiurl = ("https://r-a-d.io/api")
     useragent = ("Mozilla/5.0")
     try:
-        apiraw = get(url=apiurl, headers={'User-agent': useragent})
+        apiraw = rget(url=apiurl, headers={'User-agent': useragent})
     except (ConnectionError):
+        pause()
         clear()
         print("Connection error, retrying in 5 seconds...")
         sleep(5)
-        start()
+        body()
 
     global api
     api = apiraw.json()
@@ -257,7 +280,7 @@ def hybridTimer():
 
             sleep(1)
 
-    # travis section
+    # travis
     else:
         while (trueBool == (True)):
             if (timerCurrentSeconds % updateTime) == (
@@ -329,23 +352,35 @@ def clear():
         print("Error - Unix not true or false. Please report this.")
 
 
-def body():
+def firstbody():
 
     getPlatform()
     updateAPI()
     functionAPI()
+    unpause()
+    clear()
+    hybridTimer()
+
+
+def body():
+
+    updateAPI()
+    functionAPI()
+    unpause()
+    clear()
     hybridTimer()
 
 
 def start():
     try:
         if __name__ == ("__main__"):
-            body()
+            audio()
+            firstbody()
             clear()
 
     except (KeyboardInterrupt):
         clear()
-        exit(0)
+        exit()
 
 
 start()
