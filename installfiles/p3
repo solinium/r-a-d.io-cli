@@ -25,4 +25,4 @@ while getopts "u:ht" opt; do
   esac
 done
 
-python3 /etc/r-a-d.io-cli/radio.py
+python3 /opt/r-a-d.io-cli/radio.py

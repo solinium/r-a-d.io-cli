@@ -1,10 +1,8 @@
 # **a lightweight command-line client for [r/a/dio](https://r-a-d.io)** 
 
-[![Build Status](https://travis-ci.org/solinium/r-a-d.io-cli.svg?branch=master)](https://travis-ci.org/solinium/r-a-d.io-cli)
-
 Written in Python 3 using r/a/dio's [API](https://r-a-d.io/api).
 
-At the moment, this is only tested on Linux.
+At the moment, this is only tested on Debian.
 
 ### Installing
 
@@ -14,14 +12,14 @@ If you are not using X, don't install xdg-utils. You will not be able to open th
 ```
 sudo apt-get install python3-pip xdg-utils mpv curl
 sudo pip3 install -U requests
-bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
+sh <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### Fedora
 ```
 sudo dnf install python3-pip xdg-utils mpv curl
 sudo pip3 install -U requests
-bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
+sh <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### Arch Linux
@@ -29,19 +27,19 @@ bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/in
 ```
 sudo pacman -S python-pip xdg-utils mpv curl
 sudo pip install -U requests
-bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
+sh <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ##### CentOS
 ```
 sudo yum install python3-pip xdg-utils mpv curl
 sudo pip3 install -U requests
-bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
+sh <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh)
 ```
 
 ### Uninstalling
 ```
-bash <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)
+sh <(curl -s https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh)
 ```
 
 ### Usage

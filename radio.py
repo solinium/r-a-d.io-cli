@@ -34,29 +34,10 @@ def unpause():
 
 def getPlatform():
 
-    global win
-    global unix
-    global darwin
-    if platform.startswith('linux') == (True) or (
-        platform.startswith('darwin')) == (True) or (
-            platform.startswith('freebsd')) == (True) or (
-                platform.startswith('cygwin')) == (True) or (
-                    platform.startswith('riscos')) == (True) or (
-                        platform.startswith('atheos')) == (True) or (
-                            platform.startswith('os2')) == (True):
-                                unix = (True)
-                                win = (False)
-    elif platform.startswith('win') == (True):
-        unix = (False)
-        win = (True)
-
     if platform.startswith('darwin') == (True):
         darwin = (True)
     else:
         darwin = (False)
-
-    global isTravis
-    isTravis = 'TRAVIS' in environ
 
     global updateTime
     try:
@@ -237,24 +218,18 @@ def hybridTimer():
                     system('xdg-open %s' % (threadUrl))
             elif win == (True):
                 system('cmd /c start %s' % (threadUrl))
-
     sleep(3)
-
     clear()
-    trueBool = (True)
-    if (isTravis != (True)):
-        while (trueBool == (True)):
-            if (timerCurrentSeconds % updateTime) == (
-                0) or timerCurrentSeconds == (
-                    timerMax) or tempTitle != (
-                        songTitle):
-                            updateAPI()
-            else:
-                timerCurrentSeconds = (timerCurrentSeconds + 1)
-
+    while (True):
+        if (timerCurrentSeconds % updateTime) == (
+            0) or timerCurrentSeconds == (
+                timerMax) or tempTitle != (
+                    songTitle):
+                        updateAPI()
+        else:
+            timerCurrentSeconds = (timerCurrentSeconds + 1)
             timerCurrentReadable = str(
                 timedelta(seconds=timerCurrentSeconds))
-
             timerCurrentTemp = timerCurrentReadable[2:3]
 
             if timerCurrentTemp == (0):
@@ -280,46 +255,6 @@ def hybridTimer():
 
             sleep(1)
 
-    # travis
-    else:
-        while (trueBool == (True)):
-            if (timerCurrentSeconds % updateTime) == (
-                0) or timerCurrentSeconds == (
-                    timerMax) or tempTitle != (
-                        songTitle):
-                            updateAPI()
-            else:
-                timerCurrentSeconds = (timerCurrentSeconds + 1)
-
-            timerCurrentReadable = str(
-                timedelta(seconds=timerCurrentSeconds))
-
-            timerCurrentTemp = timerCurrentReadable[2:3]
-
-            if timerCurrentTemp == (0):
-                timerCurrent = timerCurrentReadable[2:7]
-            else:
-                timerCurrent = timerCurrentReadable[3:7]
-
-            timerCurrent = ("%s/%s") % (
-                timerCurrent, songLength)
-
-            clear()
-
-            print(songTitle)
-            print(timerCurrent)
-            print()
-            print("DJ: %s" % (djName))
-
-            if isAfkStream == (True):
-                print(isAfkStreamStr)
-
-            print()
-            print("Listeners: %s" % (listeners))
-
-            trueBool = (False)
-
-
 def updateAPI():
 
     getAPI()
@@ -344,10 +279,7 @@ def clear():
     if unix == (True):
         system('clear')
     elif unix == (False):
-        if win == (True):
-            system('cls')
-        else:
-            system('clear')
+        system('cls')
     else:
         print("Error - Unix not true or false. Please report this.")
 
@@ -372,15 +304,14 @@ def body():
 
 
 def start():
-    try:
-        if __name__ == ("__main__"):
+    if __name__ == ("__main__"):
+        try:
             audio()
             firstbody()
             clear()
 
-    except (KeyboardInterrupt):
-        clear()
-        exit()
-
+        except (KeyboardInterrupt):
+            clear()
+            exit()
 
 start()
