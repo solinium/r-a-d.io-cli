@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while getopts "u:ht" opt; do
+while getopts "u:thd" opt; do
   case $opt in
     u)
       updatetime=$OPTARG
@@ -11,8 +11,11 @@ while getopts "u:ht" opt; do
       export openthread
       ;;
     h)
-      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread (if it exists), and use -h for help."
+      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread, and use -d if you are testing to run in current directory."
       exit 0
+      ;;
+    d)
+      dev=true
       ;;
     \?)
       echo "Invalid option: -$OPTARG. Use radiocli -h for help."
@@ -24,5 +27,17 @@ while getopts "u:ht" opt; do
       ;;
   esac
 done
-
-python3 radio.py
+pyver=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+if [ $pyver -eq 0 ]; then
+	if [ $dev ]; then
+    python radio.py
+  else
+    python /opt/r-a-d.io-cli/radio.py
+  fi
+else 
+	if [ $dev ]; then
+    python3 radio.py
+  else
+    python3 /opt/r-a-d.io-cli/radio.py
+  fi
+fi

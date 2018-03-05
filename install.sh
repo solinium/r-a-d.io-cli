@@ -1,19 +1,10 @@
 #!/bin/sh
 
-sudo clear # to immediately prompt sudo password
-cd /tmp
-git clone https://github.com/solinium/r-a-d.io-cli.git
-sudo mkdir -p /opt/r-a-d.io-cli/
+sudo clear
+git clone https://github.com/solinium/r-a-d.io-cli.git /tmp/r-a-d.io-cli
+sudo mkdir /opt/r-a-d.io-cli/
 sudo cp /tmp/r-a-d.io-cli/radio.py /opt/r-a-d.io-cli/radio.py
-
-pyver=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
-
-if [ $pyver -eq 0 ]; then
-	sudo cp /tmp/r-a-d.io-cli/installfiles/p2 /usr/bin/radiocli
-else 
-	sudo cp /tmp/r-a-d.io-cli/installfiles/p3 /usr/bin/radiocli
-fi
-
+sudo cp start.sh /usr/bin/radiocli
 sudo chmod +x /usr/bin/radiocli
 rm -rf /tmp/r-a-d.io-cli/
 clear
