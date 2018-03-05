@@ -11,7 +11,7 @@ while getopts "u:thd" opt; do
       export openthread
       ;;
     h)
-      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread, and use -d if you are testing to run in current directory."
+      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread, and use -d if you are testing to run in the current directory."
       exit 0
       ;;
     d)
