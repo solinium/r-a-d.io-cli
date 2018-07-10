@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 from time import sleep
+from shutil import which
 from datetime import timedelta
-from os import environ, system
+from os import system, remove, environ
 from sys import exit, platform, stdout
 from requests import ConnectionError, get as rget
 
@@ -10,19 +11,17 @@ from requests import ConnectionError, get as rget
 def audio():
     audiourl = 'https://relay0.r-a-d.io/main.mp3'
     ipcfile = '--input-ipc-server=/tmp/mpvsocket'
-    miscparams = '--pause --player-operation-mode=cplayer --no-config --no-video --no-msg-color --terminal --really-quiet'
-    system('mpv %s %s %s &' % (miscparams, ipcfile, audiourl))
-    global socketPause
-    socketPause = '''echo '{ "command": ["set_property", "pause", %s] }' | socat - /tmp/mpvsocket; clear'''
+    parameters = '--pause --player-operation-mode=cplayer --no-config --no-video --no-msg-color --terminal --really-quiet --no-input-default-bindings --input-conf=/tmp/mpvbinds'
+    system('mpv %s %s %s &' % (parameters, ipcfile, audiourl))
 
 
 def getVars():
     global updateTime
     try:
-        if environ['frequency'] != "":
+        if environ['updatetime'] != "":
             updateTime = int(environ['updatetime'])
     except KeyError:
-        updateTime = 5
+        updateTime = 30
     global openThread
     try:
         if environ['openthread'] == "true":
@@ -131,19 +130,25 @@ def hybridTimer():
     system('clear')
     if platform.startswith('darwin'):
         print("MacOS detected.")
-    print("\u001b[32;1mwelcome to r/a/dio-cli!\033[0m\npress ctrl+c to exit.\n")
+    print(
+        "\u001b[32;1mwelcome to r/a/dio-cli!\033[0m\npress ctrl+c to exit,\npress space to pause.\n")
     if isThreadUp:
-        print("\u001b[32;1mthread is online.\033[0m")
+        print("\u001b[32;1mmeguca thread is online.\033[0m")
     else:
-        print("thread is probably not up.")
+        print("meguca thread is probably not up.")
     if openThread:
         if isThreadUp:
             print("\nopening thread...")
             if platform.startswith('darwin'):
                 system('open %s' % threadUrl)
             else:
-                system('xdg-open %s' % threadUrl)
+                if which('xdg-open') == None:
+                    print(
+                        'warning: xdg-utils is not installed! you will not be able to open the thread.')
+                else:
+                    system('xdg-open %s' % threadUrl)
     sleep(4)
+    stdout.write('\x1b]2;%s\x07' % songTitle)
     system('clear')
     while True:
         if timerCurrentSeconds % updateTime == 0 or timerCurrentSeconds == timerMax or tempTitle != songTitle:
@@ -187,14 +192,30 @@ def main():
     print('\33]0;r-a-d.io-cli\a', end='', flush=True)
     updateAPI()
     functionAPI()
-    system(socketPause % "false")
+    system(socketPause)
     hybridTimer()
 
 
 if __name__ == "__main__":
+    def checkInstall(dependencies):
+        depsInstalled = True
+        for dep in dependencies:
+            if which(dep) == None:
+                print("%s is not installed!" % dep)
+                depsInstalled = False
+        if not(depsInstalled):
+            exit(1)
+    dependencies = ['mpv', 'curl', 'socat']
+    checkInstall(dependencies)
+    binds = 'SPACE cycle "pause"'
+    with open('/tmp/mpvbinds', "w") as mpvbinds:
+        print(binds, file=mpvbinds)
+    global socketPause
+    socketPause = '''echo '{ "command": ["cycle", "pause"] }' | socat - /tmp/mpvsocket; clear'''
     try:
         getVars()
         audio()
         main()
     except (KeyboardInterrupt):
+        remove('/tmp/mpvbinds')
         system('clear')

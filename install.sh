@@ -8,4 +8,4 @@ sudo cp /tmp/r-a-d.io-cli/start.sh /usr/bin/radiocli
 sudo chmod +x /usr/bin/radiocli
 rm -rf /tmp/r-a-d.io-cli/
 clear
-echo 'Install Completed! Launch r/a/dio-cli with "radiocli".'
+echo "Install Completed! Launch r/a/dio-cli with 'radiocli'."
