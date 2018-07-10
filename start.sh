@@ -1,7 +1,11 @@
 #!/bin/sh
 
-while getopts "u:thd" opt; do
+while getopts ":v:u:thd" opt; do
   case $opt in
+    v)
+      radiovolume=$OPTARG
+      export radiovolume
+      ;;
     u)
       updatetime=$OPTARG
       export updatetime
@@ -11,7 +15,7 @@ while getopts "u:thd" opt; do
       export openthread
       ;;
     h)
-      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread, and use -d if you are testing to run in the current directory."
+      echo "Use -u and a number to choose the interval in which the timer updates, use -t to open the thread, use -v to set volume (1-100), and use -d if you are testing to run in the current directory."
       exit 0
       ;;
     d)

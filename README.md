@@ -56,11 +56,13 @@ curl https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/uninstall.sh
 
 ### Usage
 
-Call radiocli with -u and a number to choose the interval in which the timer updates, use -t to open the thread (if it exists), and use -h for help. If you are testing, use -d to run in the current directory. All flags are optional.
+Call radiocli with -u and a number to choose the interval in seconds that the api updates, use -v for volume (1-100), use -t to open the thread (if it exists), and use -h for help. If you are testing, use -d to run in the current directory. All flags are optional and in any order.
 
 Example:
-`radiocli -t -u 10`
+`radiocli -v 75 -t -u 10`
 
 ### Issues
 
 You may notice the timer jumping slightly. That's because by default api requests are being sent every 30 seconds. You can call radiocli with the -u option to experiment with different intervals.
+
+For any other issues, feel free to create an issue or a pull request!

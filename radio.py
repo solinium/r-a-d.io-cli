@@ -28,6 +28,17 @@ def getVars():
             openThread = True
     except KeyError:
         openThread = False
+    global volume
+    volume = 100
+    try:
+        if environ['radiovolume'] != "":
+            if int(environ['radiovolume']) < 1 or int(environ['radiovolume']) > 100:
+                print('volume must be 1-100!')
+                sleep(2)
+            else:
+                volume = int(environ['radiovolume'])
+    except KeyError:
+        pass
     global updateFrequencyFunction
     updateFrequencyFunction = 100
 
@@ -38,7 +49,7 @@ def getAPI():
     try:
         apiraw = rget(url=apiurl, headers={'User-agent': useragent})
     except ConnectionError:
-        system(socketPause % "true")
+        system(socketPause)
         system('clear')
         stdout.write("\x1b]2;r-a-d.io-cli\x07")
         print("Connection error, retrying in 5 seconds...")
@@ -151,17 +162,15 @@ def hybridTimer():
     stdout.write('\x1b]2;%s\x07' % songTitle)
     system('clear')
     while True:
-        if timerCurrentSeconds % updateTime == 0 or timerCurrentSeconds == timerMax or tempTitle != songTitle:
+        if timerCurrentSeconds % updateTime == 0 or timerCurrentSeconds >= timerMax or tempTitle != songTitle:
             updateAPI()
             stdout.write('\x1b]2;%s\x07' % songTitle)
         else:
             timerCurrentSeconds = timerCurrentSeconds + 1
-            timerCurrentReadable = str(timedelta(seconds=timerCurrentSeconds))
-            timerCurrentTemp = timerCurrentReadable[2:3]
-            if timerCurrentTemp == 0:
-                timerCurrent = timerCurrentReadable[2:7]
+            if str(timedelta(seconds=timerCurrentSeconds))[2:3] == 0:
+                timerCurrent = str(timedelta(seconds=timerCurrentSeconds))[2:7]
             else:
-                timerCurrent = timerCurrentReadable[3:7]
+                timerCurrent = str(timedelta(seconds=timerCurrentSeconds))[3:7]
             timerCurrent = "%s/%s" % (timerCurrent, songLength)
             system('clear')
             print(songTitle)
@@ -193,6 +202,7 @@ def main():
     updateAPI()
     functionAPI()
     system(socketPause)
+    system(socketVolume % volume)
     hybridTimer()
 
 
@@ -211,7 +221,9 @@ if __name__ == "__main__":
     with open('/tmp/mpvbinds', "w") as mpvbinds:
         print(binds, file=mpvbinds)
     global socketPause
+    global socketVolume
     socketPause = '''echo '{ "command": ["cycle", "pause"] }' | socat - /tmp/mpvsocket; clear'''
+    socketVolume = '''echo '{ "command": ["set_property", "volume", %s] }' | socat - /tmp/mpvsocket; clear'''
     try:
         getVars()
         audio()
