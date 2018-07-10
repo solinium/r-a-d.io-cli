@@ -1,7 +1,6 @@
 # **a command-line client for [r/a/dio](https://r-a-d.io)** 
 
 Written in python3 using r/a/dio's [api](https://r-a-d.io/api) and [mpv](https://mpv.io) for playback.
-At the moment, this is only tested on debian.
 
 ### Installation
 
