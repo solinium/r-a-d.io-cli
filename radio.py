@@ -1,28 +1,22 @@
 #!/usr/bin/env python3
 
+from time import sleep
 from datetime import timedelta
 from os import environ, system
 from sys import exit, platform, stdout
-from time import sleep
-from requests import get as rget
-from requests import ConnectionError
+from requests import ConnectionError, get as rget
 
 
 def audio():
     audiourl = 'https://relay0.r-a-d.io/main.mp3'
     ipcfile = '--input-ipc-server=/tmp/mpvsocket'
-    miscparams = '--pause --no-video --really-quiet'
+    miscparams = '--pause --player-operation-mode=cplayer --no-config --no-video --no-msg-color --terminal --really-quiet'
     system('mpv %s %s %s &' % (miscparams, ipcfile, audiourl))
     global socketPause
     socketPause = '''echo '{ "command": ["set_property", "pause", %s] }' | socat - /tmp/mpvsocket; clear'''
 
 
-def getPlatform():
-    global darwin
-    if platform.startswith('darwin'):
-        darwin = True
-    else:
-        darwin = False
+def getVars():
     global updateTime
     try:
         if environ['frequency'] != "":
@@ -109,7 +103,7 @@ def getSongTimeLeft():
         formattedSongcTimeLeft = readableSongcTimeLeft[2:7]
     else:
         formattedSongcTimeLeft = readableSongcTimeLeft[3:7]
-    formattedSongcTimeLeft = "%s/%s" % formattedSongcTimeLeft, songLength
+    formattedSongcTimeLeft = "%s/%s" % (formattedSongcTimeLeft, songLength)
     global songTimeLeft
     songTimeLeft = formattedSongcTimeLeft
 
@@ -124,7 +118,7 @@ def getSongTimeCurrent():
         currentSongTime = readableCurrentSongcTime[2:7]
     else:
         currentSongTime = readableCurrentSongcTime[3:7]
-    currentSongTime = "%s/%s" % currentSongTime, songLength
+    currentSongTime = "%s/%s" % (currentSongTime, songLength)
 
 
 def hybridTimer():
@@ -135,24 +129,21 @@ def hybridTimer():
     timerMax = songLengthSeconds
     tempTitle = songTitle
     system('clear')
-    if darwin:
+    if platform.startswith('darwin'):
         print("MacOS detected.")
-    print("Press ctrl+c to exit.")
+    print("\u001b[32;1mwelcome to r/a/dio-cli!\033[0m\npress ctrl+c to exit.\n")
+    if isThreadUp:
+        print("\u001b[32;1mthread is online.\033[0m")
+    else:
+        print("thread is probably not up.")
     if openThread:
-        if not(isThreadUp):
-            print("\nOpening thread...")
-            if darwin:
+        if isThreadUp:
+            print("\nopening thread...")
+            if platform.startswith('darwin'):
                 system('open %s' % threadUrl)
             else:
                 system('xdg-open %s' % threadUrl)
-        else:
-            print("\nSorry, the thread is probably not up.")
-    else:
-        if isThreadUp:
-            print("Thread is online.")
-        else:
-            print("Thread is probably not up.")
-    sleep(3)
+    sleep(4)
     system('clear')
     while True:
         if timerCurrentSeconds % updateTime == 0 or timerCurrentSeconds == timerMax or tempTitle != songTitle:
@@ -166,7 +157,7 @@ def hybridTimer():
                 timerCurrent = timerCurrentReadable[2:7]
             else:
                 timerCurrent = timerCurrentReadable[3:7]
-            timerCurrent = "%s/%s" % timerCurrent, songLength
+            timerCurrent = "%s/%s" % (timerCurrent, songLength)
             system('clear')
             print(songTitle)
             print(timerCurrent + "\n")
@@ -193,7 +184,7 @@ def updateAPI():
 
 
 def main():
-    stdout.write("\x1b]2;r-a-d.io-cli\x07")
+    print('\33]0;r-a-d.io-cli\a', end='', flush=True)
     updateAPI()
     functionAPI()
     system(socketPause % "false")
@@ -202,7 +193,7 @@ def main():
 
 if __name__ == "__main__":
     try:
-        getPlatform()
+        getVars()
         audio()
         main()
     except (KeyboardInterrupt):
