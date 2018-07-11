@@ -96,9 +96,8 @@ def getSongLength():
     global songLengthSeconds
     songLengthSeconds = endTime - startTime
     readableSongLength = str(timedelta(seconds=songLengthSeconds))
-    tempSongLength = readableSongLength[2:3]
     global songLength
-    if tempSongLength == 0:
+    if readableSongLength[2:3] == 0:
         songLength = readableSongLength[2:7]
     else:
         songLength = readableSongLength[3:7]
@@ -108,8 +107,7 @@ def getSongTimeLeft():
     global songcTimeLeft
     songcTimeLeft = endTime - currentTime
     readableSongcTimeLeft = str(timedelta(seconds=songcTimeLeft))
-    tempSongcTimeLeft = readableSongcTimeLeft[2:3]
-    if tempSongcTimeLeft == 0:
+    if readableSongcTimeLeft[2:3] == 0:
         formattedSongcTimeLeft = readableSongcTimeLeft[2:7]
     else:
         formattedSongcTimeLeft = readableSongcTimeLeft[3:7]
@@ -122,9 +120,8 @@ def getSongTimeCurrent():
     global currentSongcTime
     currentSongcTime = songLengthSeconds - songcTimeLeft
     readableCurrentSongcTime = str(timedelta(seconds=currentSongcTime))
-    tempCurrentSongcTime = readableCurrentSongcTime[2:3]
     global currentSongTime
-    if tempCurrentSongcTime == 0:
+    if readableCurrentSongcTime[2:3] == 0:
         currentSongTime = readableCurrentSongcTime[2:7]
     else:
         currentSongTime = readableCurrentSongcTime[3:7]
@@ -197,7 +194,7 @@ def hybridTimer():
             else:
                 print("Listeners: %s" % listeners + (' ' *
                                                      (len(songTitle) - (len(str(listeners)) + 11))) + '|')
-            print('-' * (len(songTitle) + 1))
+            print('_' * len(songTitle) + '|')
             sleep(1)
 
 
