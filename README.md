@@ -17,6 +17,7 @@ curl https://raw.githubusercontent.com/solinium/r-a-d.io-cli/master/install.sh >
 ##### MacOS
 
 If you don't already have it, get [brew](https://brew.sh)
+
 ```sh
 brew install python pip mpv curl
 sudo pip install -U requests
