@@ -84,7 +84,7 @@ def getAPI():
 def functionAPI():
     if isAfkStream:
         global isAfkStreamStr
-        isAfkStreamStr = "Automated Stream"
+        isAfkStreamStr = "(Automated Stream)"
     global isThreadUp
     if (threadUrl != "" and threadUrl != "none") or djName != "Hanyuu-sama":
         isThreadUp = True
@@ -173,12 +173,31 @@ def hybridTimer():
                 timerCurrent = str(timedelta(seconds=timerCurrentSeconds))[3:7]
             timerCurrent = "%s/%s" % (timerCurrent, songLength)
             system('clear')
-            print(songTitle)
-            print(timerCurrent + "\n")
-            print("DJ: %s" % djName)
+            print("\u001b[32;1m%s\033[0m" % songTitle + '|')
+            if len(timerCurrent) > len(songTitle):
+                print(timerCurrent + '|')
+            else:
+                print(timerCurrent +
+                      (' ' * (len(songTitle) - len(timerCurrent))) + '|')
+            print(' ' * len(songTitle) + '|')
+            if (len(djName) + 4) > len(songTitle):
+                print("DJ: %s" % djName + '|')
+            else:
+                print("DJ: %s" % djName +
+                      (' ' * (len(songTitle) - (len(djName) + 4))) + '|')
             if isAfkStream:
-                print(isAfkStreamStr)
-            print("\nListeners: %s" % listeners)
+                if len(isAfkStreamStr) > len(songTitle):
+                    print(isAfkStream + '|')
+                else:
+                    print(isAfkStreamStr +
+                          (' ' * (len(songTitle) - len(isAfkStreamStr))) + '|')
+            print(' ' * len(songTitle) + '|')
+            if (len(str(listeners)) + 11) > len(songTitle):
+                print("Listeners: %s" % listeners + '|')
+            else:
+                print("Listeners: %s" % listeners + (' ' *
+                                                     (len(songTitle) - (len(str(listeners)) + 11))) + '|')
+            print('-' * (len(songTitle) + 1))
             sleep(1)
 
 
