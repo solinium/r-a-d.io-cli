@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 
-from time import sleep
-from shutil import which
 from datetime import timedelta
-from os import system, remove, environ
+from os import environ, remove, system
+from shutil import which
 from sys import exit, platform, stdout
-from requests import ConnectionError, get as rget
+from time import sleep
+
+from requests import ConnectionError
+from requests import get as rget
 
 
 def audio():
     audiourl = 'https://relay0.r-a-d.io/main.mp3'
-    ipcfile = '--input-ipc-server=/tmp/mpvsocket'
-    parameters = '--pause --player-operation-mode=cplayer --no-config --no-video --no-msg-color --terminal --really-quiet --no-input-default-bindings --input-conf=/tmp/mpvbinds'
-    system('mpv %s %s %s &' % (parameters, ipcfile, audiourl))
+    ipcfile = '/tmp/mpvsocket'
+    parameters = f'--pause --player-operation-mode=cplayer --no-config --no-video --no-msg-color --terminal --really-quiet --no-input-default-bindings --input-conf={ipcfile}'
+    system('mpv %s %s &' % (parameters, audiourl))
 
 
 def getVars():
@@ -170,17 +172,17 @@ def hybridTimer():
                 timerCurrent = str(timedelta(seconds=timerCurrentSeconds))[3:7]
             timerCurrent = "%s/%s" % (timerCurrent, songLength)
             system('clear')
-            print("\u001b[32;1m%s\033[0m" % songTitle + '|')
+            print('|' + "\u001b[32;1m%s\033[0m" % songTitle + '|')
             if len(timerCurrent) > len(songTitle):
-                print(timerCurrent + '|')
+                print('|' + timerCurrent + '|')
             else:
-                print(timerCurrent +
+                print('|' + timerCurrent +
                       (' ' * (len(songTitle) - len(timerCurrent))) + '|')
-            print(' ' * len(songTitle) + '|')
+            print('|' + ' ' * len(songTitle) + '|')
             if (len(djName) + 4) > len(songTitle):
-                print("DJ: %s" % djName + '|')
+                print('|' + "DJ: %s" % djName + '|')
             else:
-                print("DJ: %s" % djName +
+                print('|' + "DJ: %s" % djName +
                       (' ' * (len(songTitle) - (len(djName) + 4))) + '|')
             if isAfkStream:
                 if len(isAfkStreamStr) > len(songTitle):
@@ -190,11 +192,11 @@ def hybridTimer():
                           (' ' * (len(songTitle) - len(isAfkStreamStr))) + '|')
             print(' ' * len(songTitle) + '|')
             if (len(str(listeners)) + 11) > len(songTitle):
-                print("Listeners: %s" % listeners + '|')
+                print('|' + "Listeners: %s" % listeners + '|')
             else:
-                print("Listeners: %s" % listeners + (' ' *
-                                                     (len(songTitle) - (len(str(listeners)) + 11))) + '|')
-            print('_' * len(songTitle) + '|')
+                print('|' + "Listeners: %s" % listeners + (' ' *
+                                                           (len(songTitle) - (len(str(listeners)) + 10))) + '|')
+            print('|' + '_' * len(songTitle) + ' |')
             sleep(1)
 
 
